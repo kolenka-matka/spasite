@@ -35,3 +35,9 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+class MoviesChoiceForm(forms.Form):  # пусть это будет начало нашего поиска хаха
+    selected_genres = forms.MultipleChoiceField(choices=[
+        ('h', 'Horror'),
+        ('f', 'Fantasy')
+    ])

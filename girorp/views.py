@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from .forms import LoginForm
+from .forms import MoviesChoiceForm
 
 # Create your views here.
 # описание функций для каждой страницы
@@ -60,4 +61,13 @@ def dashboard(request):
 def logout_view(request):
     logout(request)
     return render(request, "account/logged_out.html")
+
+def choose_movies(request):
+    form = MoviesChoiceForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            return HttpResponseRedirect('/movies_choice/')
+    else:
+        form = MoviesChoiceForm()
+    return render(request, 'movies_choice.html', {'form': form})
 
