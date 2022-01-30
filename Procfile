@@ -1,2 +1,1 @@
-web: python manage.py runserver
-web: bundle exec thin start -p $PORT
+web: python manage.py runserver -p $PORT
