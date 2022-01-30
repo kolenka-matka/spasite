@@ -2,10 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 
 def create_request(selected_genres):
-    if selected_genres == ['f']:
-        text_ = requests.get("https://www.imdb.com/search/title/?genres=fantasy").text
-    else:
-        text_ = requests.get("https://www.imdb.com/search/title/?genres=horror").text
+    url = "https://www.imdb.com/search/title/"
+    if selected_genres:
+        genres = ','.join(selected_genres)
+        url = url + "?genres=" + genres
+    text_ = requests.get(url).text
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")
@@ -24,7 +25,8 @@ def create_request(selected_genres):
     output = []
 
     for item in found:
-        src = item.find("a").text
+        name = item.find("a").text
+        src = item.find
         year = item.find('span', class_="lister-item-year text-muted unbold").text
         length_in_min = item.find('span', class_="runtime")
         genre = item.find('span', class_="genre").text[1:]
@@ -32,7 +34,7 @@ def create_request(selected_genres):
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
 
-        dic = {'name': src, 'year': year, 'genre': genre, "summary": summary}
+        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary}
 
         """
         film = '\n'.join((
