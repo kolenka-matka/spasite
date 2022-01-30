@@ -62,6 +62,17 @@ def logout_view(request):
     logout(request)
     return render(request, "account/logged_out.html")
 
+def password_change(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+
+    else:
+        user_form = UserRegistrationForm()
+        return render(request, 'account/password_change_form.html', {'user_form': user_form})
+    return render(request, "account/password_change_form.html")
+
+def password_change_done(request):
+    return render(request, "account/password_change_done.html")
 def choose_movies(request):
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
