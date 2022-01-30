@@ -73,6 +73,7 @@ def password_change(request):
 
 def password_change_done(request):
     return render(request, "account/password_change_done.html")
+
 def choose_movies(request):
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
@@ -86,3 +87,6 @@ def choose_movies(request):
 
 # def movies_results(request):
 
+def tests(request):
+    form = MoviesChoiceForm()
+    return render(request, 'testing.html', {'form': form})

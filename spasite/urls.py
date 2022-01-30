@@ -30,6 +30,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('movies_choice/', views.choose_movies, name='movies')
+    path('movies_choice/', views.choose_movies, name='movies'),
+    path('testing/', views.tests, name='tests')
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ]
