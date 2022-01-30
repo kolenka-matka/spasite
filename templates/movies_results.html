@@ -5,8 +5,16 @@
     <title>найденные фильмы</title>
 </head>
 <body>
-
-{{ temp }}
+{% for i in temp %}
+<tr>
+    <!-- <p> Name: <a href="https://www.imdb.com/title/tt9032400/"> <td>{{ i.name }}</td> </a></p> -->
+    <p> Name: <td>{{ i.name }}</td> </p>
+    <p> Year: <td>{{ i.year }}</td> </p>
+    <p> Genres: <td>{{ i.genre }}</td> </p>
+    <p> Summary: <td>{{ i.summary }}</td> </p>
+    <br>
+    {% endfor %}
+</tr>
 
 </body>
 </html>
