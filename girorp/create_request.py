@@ -9,21 +9,24 @@ def create_request(selected_genres):
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")
+    results = list()
     for item in found:
-        return(item)
-        '''src = item.find("a").text
+        src = item.find("a").text
         year = item.find('span', class_="lister-item-year text-muted unbold").text
         length_in_min = item.find('span', class_="runtime")
         genre = item.find('span', class_="genre").text
         # ratings = item.find('div', class_="ratings-bar").text
         summary = item.find_all("p", class_="text-muted")[-1].text
         people = item.find("p", class_='').text
-
-        print(src)
-        print(year)
+        film = '\n'.join((
+        src,
+        year,
         # print(length_in_min)
-        print(genre)
+        genre,
         # print(ratings)
-        print(summary)
+        summary,
         # print(people)
-        print('\nконец фильма) приколы\n')'''
+        '\nконец фильма) приколы\n'))
+        results.append(film)
+
+    return '\n'.join(results)
