@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from .forms import LoginForm
 from .forms import MoviesChoiceForm
+from .create_request import create_request
 
 # Create your views here.
 # описание функций для каждой страницы
@@ -65,8 +66,12 @@ def choose_movies(request):
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            return HttpResponseRedirect('/movies_choice/')
+            temp = form.cleaned_data.get("selected_genres")
+            print(temp)
+            return render(request, 'movies_results.html', {'temp': create_request(temp)})
     else:
         form = MoviesChoiceForm()
     return render(request, 'movies_choice.html', {'form': form})
+
+# def movies_results(request):
 

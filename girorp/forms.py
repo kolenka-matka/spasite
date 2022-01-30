@@ -41,3 +41,5 @@ class MoviesChoiceForm(forms.Form):  # пусть это будет начало
         ('h', 'Horror'),
         ('f', 'Fantasy')
     ])
+
+    # print(selected_genres)
