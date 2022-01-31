@@ -1,26 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
 </head>
-<body>
-<h1>Log in</h1>
-    {% if form.errors %}
-        <p>
-            Your username and password didn't match.
-            Please try again.
-        </p>
-    {% else %}
-        <p>Please, use the following form to log in:</p>
-    {% endif %}
-    <div class="login-form">
-        <form action="{% url 'login' %}" method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}"/>
-            <p><input type="submit" value="Log in"></p>
-        </form>
+</head>
+
+<header class="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="header_logo">Girorp</div>
+
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">Films</a>
+                <a class="nav_link" href="#">Books</a>
+                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                
+            </nav>
+        </div>
     </div>
+</header>
+
+<body id="login">
+        <div class="login-form">
+            <form class="box" action="{% url 'login' %}" method="post">
+                <h1 class="login-form">Log In</h1>
+
+                {% if form.errors %}
+                    <p>
+                        Your username and password didn't match.
+                        Please try again.
+                    </p>
+                {% else %}
+                    <p>Please, use the following form to log in:</p>
+                {% endif %}
+
+
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <p><input class="btn_login" type="submit" value="Log in"></p>
+            </form>
+        </div>
+
+
+
+
 </body>
 </html>
