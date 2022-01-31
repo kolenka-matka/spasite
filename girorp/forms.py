@@ -36,10 +36,31 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
 
-class MoviesChoiceForm(forms.Form):  # пусть это будет начало нашего поиска хаха
-    selected_genres = forms.MultipleChoiceField(choices=[
-        ('h', 'Horror'),
-        ('f', 'Fantasy')
-    ])
+class MoviesChoiceForm(forms.Form):
 
-    # print(selected_genres)
+    action = forms.BooleanField(label='экшн', help_text='action', required=False)
+    adventure = forms.BooleanField(label='приключения', help_text='adventure', required=False)
+    animation = forms.BooleanField(label='мультфильм', help_text='animation', required=False)
+    biography = forms.BooleanField(label='биография', help_text='biography', required=False)
+    comedy = forms.BooleanField(label='комедия', help_text='comedy', required=False)
+    crime = forms.BooleanField(label='криминал', help_text='crime', required=False)
+    documentary = forms.BooleanField(label='документальный фильм', help_text='documentary', required=False)
+    drama = forms.BooleanField(label='драма', help_text='drama', required=False)
+    family = forms.BooleanField(label='семейное кино', help_text='family', required=False)
+    fantasy = forms.BooleanField(label='фэнтези', help_text='fantasy', required=False)
+    film_noir = forms.BooleanField(label='нуар', help_text='film-noir', required=False)
+    history = forms.BooleanField(label='исторический фильм', help_text='history', required=False)
+    horror = forms.BooleanField(label='ужасы', help_text='horror', required=False)
+    musical = forms.BooleanField(label='мюзикл', help_text='musical', required=False)
+    mystery = forms.BooleanField(label='детектив', help_text='mystery', required=False)
+    romance = forms.BooleanField(label='романтика', help_text='romance', required=False)
+    sci_fi = forms.BooleanField(label='научная фантастика', help_text='sci-fi', required=False)
+    sport = forms.BooleanField(label='о спорте', help_text='sport', required=False)
+    thriller = forms.BooleanField(label='триллер', help_text='thriller', required=False)
+    western = forms.BooleanField(label='вестерн', help_text='western', required=False)
+    genres = [action, adventure,animation, biography,comedy, crime,documentary,drama,family,fantasy,film_noir,
+              history,horror,musical,mystery,romance,sci_fi,sport,thriller,western]
+
+    selected_genres = [item.help_text for item in genres if item is not None]
+    print(genres)
+
