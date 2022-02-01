@@ -1,11 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-def create_request(selected_genres):
-    url = "https://www.imdb.com/search/title/"
+def create_request(selected_genres=None, countries=None):
+    url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short"
     if selected_genres:
         genres = ','.join(selected_genres)
-        url = url + "?genres=" + genres
+        url = url + "&genres=" + genres
+    if countries:
+        countries = ','.join(countries)
+        url = url + "&countries=" + countries
     text_ = requests.get(url).text
 
     soup = BeautifulSoup(text_, 'lxml')

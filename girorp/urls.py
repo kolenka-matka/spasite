@@ -17,7 +17,7 @@ urlpatterns = [
     path(r'^$', views.dashboard, name='dashboard'),
     path('password-change/', 'django.contrib.auth.views.password_change', name='password_change'),
     path('password-change/done/$', 'django.contrib.auth.views.password_change_done', name='password_change_done'),
-    path('movies_choice/', views.choose_movies, name='movies'),
+    path('search/movies_choice/', views.choose_movies, name='movies'),
     path('testing/', views.tests, name='tests')
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ]

@@ -76,10 +76,11 @@ def password_change_done(request):
     return render(request, "account/password_change_done.html")
 
 
-def choose_movies(request):
+def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ЖАНРЫ !!!!!!!!!!!!!
             action = form.cleaned_data.get('action')
             adventure = form.cleaned_data.get('action')
             animation = form.cleaned_data.get('action')
@@ -108,10 +109,14 @@ def choose_movies(request):
                       adventure: 'adventure', animation: 'animation'}
 
             selected_genres = [genres[item] for item in genres if item]
-            return render(request, 'movies_results.html', {'temp': create_request(selected_genres)})
+
+            countries = form.cleaned_data.get('country')
+
+
+            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres, countries)})
     else:
         form = MoviesChoiceForm()
-    return render(request, 'movies_choice.html', {'form': form})
+    return render(request, 'search/movies_choice.html', {'form': form})
 
 
 def tests(request):
