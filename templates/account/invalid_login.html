@@ -1,12 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Неверный логин</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
 </head>
-<body>
-<h1>:(</h1>
-такого логина нет в нашей базе данных! но ничего, Вы можете <a href="{% url "signin" %}">создать новый аккаунт</a> или
-попробовать <a href="{% url "login" %}">войти снова</a>.
+
+<header class="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Girorp</a></div>
+
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">Films</a>
+                <a class="nav_link" href="#">Books</a>
+                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                
+            </nav>
+        </div>
+    </div>
+</header>
+
+<body id="login">
+
+<div class="login-form">
+    <div class="box">
+        <h1 class="login-form">Oops :(</h1>
+        <div class="for_text">
+            <b>Такого логина нет в нашей базе данных! 
+            <br> Но ничего, Вы можете <a class="regular_link" href="{% url "signin" %}">создать новый аккаунт</a> или
+            попробовать <a class="regular_link" href="{% url "login" %}">войти снова</a>.
+        </div>
+        <br>
+        <br>
+        <a class="btn_login" href="{% url "login" %}">Log In</a>
+        <a class="btn_login" href="{% url "signin" %}">Sign Up</a>
+    </div>
+</div>
 </body>
 </html>

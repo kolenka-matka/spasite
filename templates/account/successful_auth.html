@@ -1,11 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>успешная аутентификация</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
 </head>
-<body>
-    <h1>:)</h1>
-    вы успешно вошли в свой аккаунт! теперь можно <a href="{% url "index" %}">вернуться на главную страницу</a>.
+
+<header class="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Girorp</a></div>
+
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">Films</a>
+                <a class="nav_link" href="#">Books</a>
+                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                
+            </nav>
+        </div>
+    </div>
+</header>
+
+<body id="login">
+<div class="login-form">
+    <div class="box">
+        <h1 class="login-form">:)!</h1>
+        <div class="for_text">
+    Вы успешно вошли в свой аккаунт! 
+    <br> Теперь можно <a class="regular_link" href="{% url "index" %}">вернуться на главную страницу</a>.
 </body>
 </html>

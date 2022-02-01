@@ -1,17 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
-</head>
-<body>
-<h1>Create an account</h1>
-    <p>Please, sign up using the following form:</p>
-    <form action="." method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
 
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
+</head>
+
+<header class="header">
+    <div class="container">
+        <div class="header_inner">
+            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Girorp</a></div>
+
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">Films</a>
+                <a class="nav_link" href="#">Books</a>
+                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                
+            </nav>
+        </div>
+    </div>
+</header>
+
+<body id="login">
+    <div class="login-form">   
+            <form  class="box_signin" action="." method="post">
+                <h1 class="login-form">Create an account</h1>
+                <p class="center_things">Please, sign up using the following form:</p>
+                {{ user_form.as_p }}
+                {% csrf_token %}
+                <p><input class="btn_login" type="submit" value="Create my account"></p>
+            </form>
+    </div>
 </body>
 </html>
