@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -8,9 +7,6 @@ from .forms import LoginForm
 from .forms import MoviesChoiceForm
 from .create_request import create_request
 from .forms import LoginForm, UserRegistrationForm
-
-# Create your views here.
-# описание функций для каждой страницы
 
 
 def index(request):
