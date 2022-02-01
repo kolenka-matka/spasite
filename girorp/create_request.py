@@ -10,19 +10,7 @@ def create_request(selected_genres):
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")
-    results = list()
-
-    """
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # help = soup.find_all("", attrs={property: "imdb:pageConst"})
-    text_ = requests.get("https://www.imdb.com/title/tt9032400/").text
-    soup = BeautifulSoup(text_, 'lxml')
-    help = soup.find_all("meta", class_="imdb:pageConst")
-    return help
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    """
-
-    output = []
+    output = list()
 
     for item in found:
         name = item.find("a").text
@@ -35,22 +23,5 @@ def create_request(selected_genres):
         people = item.find("p", class_='').text
 
         dic = {'name': name, 'year': year, 'genre': genre, "summary": summary}
-
-        """
-        film = '\n'.join((
-        src,
-        year,
-        # print(length_in_min)
-        genre,
-        # print(ratings)
-        summary,
-        # print(people)
-        '\nконец фильма) приколы\n'))
-        film += '\n'
-        results.append(film)
-        results.append("\n")
-        """
-
         output.append(dic)
-
     return output
