@@ -58,9 +58,7 @@ class MoviesChoiceForm(forms.Form):
     sport = forms.BooleanField(label='о спорте', help_text='sport', required=False)
     thriller = forms.BooleanField(label='триллер', help_text='thriller', required=False)
     western = forms.BooleanField(label='вестерн', help_text='western', required=False)
-    genres = [action, adventure,animation, biography,comedy, crime,documentary,drama,family,fantasy,film_noir,
-              history,horror,musical,mystery,romance,sci_fi,sport,thriller,western]
 
-    selected_genres = [item.help_text for item in genres if item is not None]
-    print(genres)
+
+    # print(genres)
 
