@@ -3,10 +3,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from .forms import LoginForm
-from .forms import MoviesChoiceForm
 from .create_request import create_request
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, MoviesChoiceForm
 
 
 def index(request):
@@ -79,11 +77,11 @@ def password_change_done(request):
 def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
-        if form.is_valid():
+        if form.is_valid() and form.is_valid():
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ЖАНРЫ !!!!!!!!!!!!!
             action = ('action', form.cleaned_data.get('action'))
-            adventure = ('adventure', form.cleaned_data.get('action'))
-            animation = ('animation', form.cleaned_data.get('action'))
+            adventure = ('adventure', form.cleaned_data.get('adventure'))
+            animation = ('animation', form.cleaned_data.get('animation'))
             biography = ('biography', form.cleaned_data.get('biography'))
             comedy = ('comedy', form.cleaned_data.get('comedy'))
             crime = ('crime', form.cleaned_data.get('crime'))
@@ -102,19 +100,46 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             thriller = ('thriller', form.cleaned_data.get('thriller'))
             western = ('western', form.cleaned_data.get('western'))
 
-            genres = [adventure, animation, biography, comedy, crime, documentary, drama, family,
+            genres = [adventure, animation, biography, comedy, crime, documentary, drama, family, action,
                       fantasy, film_noir, history, horror, musical, mystery, romance, sci_fi, sport, thriller, western]
             selection = str()
             selected_genres = [item[0].replace('_', '-') for item in genres if item[1] == True]
-            print(selected_genres)
             if selected_genres:
                 selection += 'вы выбрали следующие жанры: ' + ', '.join(selected_genres)
             countries = form.cleaned_data.get('country')
             if countries:
                 selection += '\nвы выбрали следующие страны: ' + ', '.join(countries)
 
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ИСКЛЮЧИТЬ ЖАНРЫ !!!!!!!!!!!!!
+            exclude_action = ('action', form.cleaned_data.get('exclude_action'))
+            exclude_adventure = ('adventure', form.cleaned_data.get('exclude_adventure'))
+            exclude_animation = ('animation', form.cleaned_data.get('exclude_animation'))
+            exclude_biography = ('biography', form.cleaned_data.get('exclude_biography'))
+            exclude_comedy = ('comedy', form.cleaned_data.get('exclude_comedy'))
+            exclude_crime = ('crime', form.cleaned_data.get('exclude_crime'))
+            exclude_documentary = ('documentary', form.cleaned_data.get('exclude_documentary'))
+            exclude_drama = ('drama', form.cleaned_data.get('exclude_drama'))
+            exclude_family = ('family', form.cleaned_data.get('exclude_family'))
+            exclude_fantasy = ('fantasy', form.cleaned_data.get('exclude_fantasy'))
+            exclude_film_noir = ('film_noir', form.cleaned_data.get('exclude_noir'))
+            exclude_history = ('history', form.cleaned_data.get('exclude_history'))
+            exclude_horror = ('horror', form.cleaned_data.get('exclude_horror'))
+            exclude_musical = ('musical', form.cleaned_data.get('exclude_musical'))
+            exclude_mystery = ('mystery', form.cleaned_data.get('exclude_mystery'))
+            exclude_romance = ('romance', form.cleaned_data.get('exclude_romance'))
+            exclude_sci_fi = ('sci_fi', form.cleaned_data.get('exclude_sci_fi'))
+            exclude_sport = ('sport', form.cleaned_data.get('exclude_sport'))
+            exclude_thriller = ('thriller', form.cleaned_data.get('exclude_thriller'))
+            exclude_western = ('western', form.cleaned_data.get('exclude_western'))
 
-            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres, countries), 'selection': selection})
+            exclude_genres = {exclude_adventure, exclude_animation, exclude_biography, exclude_comedy, exclude_crime, exclude_documentary,
+                              exclude_drama, exclude_family, exclude_action, fantasy, exclude_film_noir, exclude_history, exclude_horror, exclude_fantasy,
+                              exclude_musical, exclude_mystery, exclude_romance, exclude_sci_fi, exclude_sport, exclude_thriller, exclude_western}
+            exclude_genres = {item[0].replace('_', '-') for item in exclude_genres if item[1] == True}
+            if exclude_genres:
+                selection += '\nвы исключили следующие жанры: ' + ', '.join(exclude_genres)
+
+            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres=selected_genres, countries=countries, exclude_genres=exclude_genres), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
