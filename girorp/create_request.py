@@ -9,7 +9,9 @@ def create_request(selected_genres=None, countries=None):
     if countries:
         countries = ','.join(countries)
         url = url + "&countries=" + countries
+    print(url)
     text_ = requests.get(url).text
+
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")

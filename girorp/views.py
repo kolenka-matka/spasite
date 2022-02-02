@@ -81,39 +81,40 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
     if request.method == 'POST':
         if form.is_valid():
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ЖАНРЫ !!!!!!!!!!!!!
-            action = form.cleaned_data.get('action')
-            adventure = form.cleaned_data.get('action')
-            animation = form.cleaned_data.get('action')
-            biography = form.cleaned_data.get('biography')
-            comedy = form.cleaned_data.get('comedy')
-            crime = form.cleaned_data.get('crime')
-            documentary = form.cleaned_data.get('documentary')
-            drama = form.cleaned_data.get('drama')
-            family = form.cleaned_data.get('family')
-            fantasy = form.cleaned_data.get('fantasy')
-            film_noir = form.cleaned_data.get('film_noir')
-            history = form.cleaned_data.get('history')
-            horror = form.cleaned_data.get('horror')
-            musical = form.cleaned_data.get('musical')
-            mystery = form.cleaned_data.get('mystery')
-            romance = form.cleaned_data.get('romance')
-            sci_fi = form.cleaned_data.get('sci_fi')
-            sport = form.cleaned_data.get('sport')
-            thriller = form.cleaned_data.get('thriller')
-            western = form.cleaned_data.get('western')
+            action = ('action', form.cleaned_data.get('action'))
+            adventure = ('adventure', form.cleaned_data.get('action'))
+            animation = ('animation', form.cleaned_data.get('action'))
+            biography = ('biography', form.cleaned_data.get('biography'))
+            comedy = ('comedy', form.cleaned_data.get('comedy'))
+            crime = ('crime', form.cleaned_data.get('crime'))
+            documentary = ('documentary', form.cleaned_data.get('documentary'))
+            drama = ('drama', form.cleaned_data.get('drama'))
+            family = ('family', form.cleaned_data.get('family'))
+            fantasy = ('fantasy', form.cleaned_data.get('fantasy'))
+            film_noir = ('film_noir', form.cleaned_data.get('noir'))
+            history = ('history', form.cleaned_data.get('history'))
+            horror = ('horror', form.cleaned_data.get('horror'))
+            musical = ('musical', form.cleaned_data.get('musical'))
+            mystery = ('mystery', form.cleaned_data.get('mystery'))
+            romance = ('romance', form.cleaned_data.get('romance'))
+            sci_fi = ('sci_fi', form.cleaned_data.get('sci_fi'))
+            sport = ('sport', form.cleaned_data.get('sport'))
+            thriller = ('thriller', form.cleaned_data.get('thriller'))
+            western = ('western', form.cleaned_data.get('western'))
 
-            genres = {biography: 'biography', comedy: 'comedy', crime: 'crime', documentary: 'documentary',
-                      drama: 'drama', family: 'family', fantasy: 'fantasy', film_noir: 'film-noir', history: 'history',
-                      horror: 'horror', musical: 'musical', mystery: 'mystery', romance: 'romance', sci_fi: 'sci-fi',
-                      sport: 'sport', thriller: 'thriller', western: 'western', action: 'action',
-                      adventure: 'adventure', animation: 'animation'}
-
-            selected_genres = [genres[item] for item in genres if item]
-
+            genres = [adventure, animation, biography, comedy, crime, documentary, drama, family,
+                      fantasy, film_noir, history, horror, musical, mystery, romance, sci_fi, sport, thriller, western]
+            selection = str()
+            selected_genres = [item[0].replace('_', '-') for item in genres if item[1] == True]
+            print(selected_genres)
+            if selected_genres:
+                selection += 'вы выбрали следующие жанры: ' + ', '.join(selected_genres)
             countries = form.cleaned_data.get('country')
+            if countries:
+                selection += '\nвы выбрали следующие страны: ' + ', '.join(countries)
 
 
-            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres, countries)})
+            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres, countries), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
