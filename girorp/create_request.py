@@ -1,15 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
-def create_request(selected_genres=None, countries=None):
-    url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short"
+
+def create_request(selected_genres=None, countries=None, exclude_genres=set()):
+    print('exclude: ', exclude_genres, ', include:', selected_genres)
+    url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
+        if exclude_genres:
+            selected_genres = [item for item in selected_genres if item not in exclude_genres]
         genres = ','.join(selected_genres)
         url = url + "&genres=" + genres
+
     if countries:
         countries = ','.join(countries)
         url = url + "&countries=" + countries
     text_ = requests.get(url).text
+
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")
@@ -20,8 +26,13 @@ def create_request(selected_genres=None, countries=None):
         src = item.find
         year = item.find('span', class_="lister-item-year text-muted unbold").text
         length_in_min = item.find('span', class_="runtime")
-        genre = item.find('span', class_="genre").text[1:]
+        genre = str()
+        if item.find('span', class_="genre") is not None:
+            genre = item.find('span', class_="genre").text[1:]
+            if any(item in genre.lower() for item in exclude_genres):
+                continue
         # ratings = item.find('div', class_="ratings-bar").text
+
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
 
