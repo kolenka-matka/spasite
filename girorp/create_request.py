@@ -9,7 +9,6 @@ def create_request(selected_genres=None, countries=None):
     if countries:
         countries = ','.join(countries)
         url = url + "&countries=" + countries
-    print(url)
     text_ = requests.get(url).text
 
 
@@ -22,8 +21,10 @@ def create_request(selected_genres=None, countries=None):
         src = item.find
         year = item.find('span', class_="lister-item-year text-muted unbold").text
         length_in_min = item.find('span', class_="runtime")
-        genre = item.find('span', class_="genre").text[1:]
+        if item.find('span', class_="genre") is not None:
+            genre = item.find('span', class_="genre").text[1:]
         # ratings = item.find('div', class_="ratings-bar").text
+
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
 
