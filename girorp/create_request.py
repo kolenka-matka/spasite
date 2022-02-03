@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from googletrans import Translator
 
 
-def create_request(selected_genres=None, countries=None, exclude_genres=set()):
+def create_request(selected_genres=None, countries=None, exclude_genres=set(), plot=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
@@ -14,8 +15,16 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set()):
     if countries:
         countries = ','.join(countries)
         url = url + "&countries=" + countries
-    text_ = requests.get(url).text
 
+    if plot:
+        translator = Translator()
+        plot = translator.translate(plot, dest='en').text.lower().replace(',', '').replace('.', '').split()
+
+        plot = '+'.join(plot)
+        url = url + "&plot=" + plot
+
+    text_ = requests.get(url).text
+    print(url)
 
     soup = BeautifulSoup(text_, 'lxml')
     found = soup.find_all("div", class_="lister-item-content")

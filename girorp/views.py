@@ -139,7 +139,9 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             if exclude_genres:
                 selection += '\nвы исключили следующие жанры: ' + ', '.join(exclude_genres)
 
-            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres=selected_genres, countries=countries, exclude_genres=exclude_genres), 'selection': selection})
+            plot = form.cleaned_data.get('plot')
+
+            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres=selected_genres, countries=countries, exclude_genres=exclude_genres, plot=plot), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
