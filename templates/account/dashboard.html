@@ -1,11 +1,81 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Расстрел</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
 </head>
+
+
+<header class="header_dark">
+    <div class="container">
+        <div class="header_inner">
+                <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+
+                <nav class="nav">
+                    <a class="nav_link" href="{% url "movies" %}">Films</a>
+                    <a class="nav_link" href="#">Books</a>
+                    <a class="nav_link" href="#">Games</a>
+                    <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="col-2-3">
+    <h1>Dashboard</h1>
+    <h3>Welcome to your dashboard.</h3>
+</div>
+
+<div class="profile_info">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium lectus vitae rutrum convallis. Aliquam cursus porta orci quis pulvinar. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque tempus leo ac mauris sodales elementum. </p>
+    <p>Fusce ullamcorper, augue ac maximus interdum, lorem odio malesuada ante, quis iaculis ex mi sit amet ex. Praesent laoreet magna est, mollis ultricies mauris porttitor in. Maecenas eu lacus vel sapien posuere convallis. Praesent nulla est, pellentesque in rhoncus in, commodo vel risus. Suspendisse sem quam, pharetra in quam vitae, feugiat imperdiet odio. Proin neque nunc, viverra vel porta non, dapibus non nisi. Mauris ut orci odio. Aenean sed convallis eros. Vestibulum pellentesque rhoncus sem, quis rhoncus nisl porttitor quis. Nam condimentum nec ligula in elementum.</p>
+</div>
+
+
+
+
 <body>
-<h1>Dashboard</h1>
-    <p>Welcome to your dashboard.</p>
+<div class="profile_box">
+    <div class="profile_image">
+        <br><img class="avatar" src="../static/images/avatar.jpg" hspace=15 vspace=15 width="250" height="250" alt="ну и где">
+    </div>
+
+        <br> Username: {{ request.user.username }}
+        <br> First name: {{ request.user.first_name }}
+        <br> Email: {{ request.user.email }}
+
+    <br>
+    <br><a class="btn_login" href="">Edit profile</a>
+    <br>
+</div>
+
+
+
+
 </body>
+
+<br>
+
+<footer>
+    <div class="footer-content">
+        <h1>Girorp</h1>
+    </div>
+
+
+    <div class="footer-bottom">
+        <h3>get incredible reviews only recommended priority</h3>
+        <p>©2021—2022 project</p>
+    </div>
+</footer>
+
+
 </html>
