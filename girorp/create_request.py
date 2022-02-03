@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from googletrans import Translator
 
 
-def create_request(selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None):
+def create_request(selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
@@ -15,6 +15,10 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set(), p
     if countries:
         countries = ','.join(countries)
         url = url + "&countries=" + countries
+
+    if actors:
+        actors = ','.join(actors)
+        url = url + "&role=" + actors
 
     if plot:
         translator = Translator()

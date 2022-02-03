@@ -110,6 +110,10 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             if countries:
                 selection.append('вы выбрали следующие страны: ' + ', '.join(countries))
 
+            actors = form.cleaned_data.get('actors')
+            if actors:
+                selection.append('вы выбрали следующих актеров: ' + ', '.join(actors))
+
             ratings = form.cleaned_data.get('ratings')
             if ratings:
                 selection.append('вы выбрали рейтинги ' + ', '.join(ratings))
@@ -146,7 +150,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             plot = form.cleaned_data.get('plot')
 
             return render(request, 'search/movies_results.html',
-                          {'temp': create_request(selected_genres, countries, exclude_genres, plot, ratings), 'selection': selection})
+                          {'temp': create_request(selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
