@@ -5,9 +5,14 @@
     <title>найденные фильмы</title>
 </head>
 <body>
-<p>
-    {{ selection }}
-</p>
+
+<tr>
+{% for item in selection %}
+    <p>
+        {{ item }}
+    </p>
+{% endfor %}
+</tr>
 
 {% for i in temp %}
 <tr>
@@ -17,8 +22,8 @@
     <p> Genres: <td>{{ i.genre }}</td> </p>
     <p> Summary: <td>{{ i.summary }}</td> </p>
     <br>
-    {% endfor %}
 </tr>
+{% endfor %}
 
 </body>
 </html>

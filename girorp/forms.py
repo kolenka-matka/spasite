@@ -65,25 +65,47 @@ class MoviesChoiceForm(forms.Form):
 
     plot = forms.CharField(label='сюжет', required=False, help_text='введите здесь ключевые слова, которые могут встретиться в описании сюжета фильма. слова можно вводить на русском или английском языке. в результаты поиска войдут только фильмы, в описании которых присутствуют все введенные слова.')
 
-    exclude_action = forms.BooleanField(label='убрать экшн', required=False)
-    exclude_adventure = forms.BooleanField(label='убрать приключения', required=False)
-    exclude_animation = forms.BooleanField(label='убрать мультфильм', required=False)
-    exclude_biography = forms.BooleanField(label='убрать биография', required=False)
-    exclude_comedy = forms.BooleanField(label='убрать комедия', required=False)
-    exclude_crime = forms.BooleanField(label='убрать криминал', required=False)
-    exclude_documentary = forms.BooleanField(label='убрать документальный фильм', required=False)
-    exclude_drama = forms.BooleanField(label='убрать драма', required=False)
-    exclude_family = forms.BooleanField(label='убрать семейное кино', required=False)
-    exclude_fantasy = forms.BooleanField(label='убрать фэнтези', required=False)
-    exclude_film_noir = forms.BooleanField(label='убрать нуар', required=False)
-    exclude_history = forms.BooleanField(label='убрать исторический фильм', required=False)
-    exclude_horror = forms.BooleanField(label='убрать ужасы', required=False)
-    exclude_musical = forms.BooleanField(label='убрать мюзикл', required=False)
-    exclude_mystery = forms.BooleanField(label='убрать детектив', required=False)
-    exclude_romance = forms.BooleanField(label='убрать романтика', required=False)
-    exclude_sci_fi = forms.BooleanField(label='убрать научная фантастика', required=False)
-    exclude_sport = forms.BooleanField(label='убрать о спорте', required=False)
-    exclude_thriller = forms.BooleanField(label='убрать триллер', required=False)
-    exclude_western = forms.BooleanField(label='убрать вестерн', required=False)
+    ratings = forms.MultipleChoiceField(choices=[
+        ('G', 'G'),
+        ('PG', 'PG'),
+        ('PG-13', 'PG-13'),
+        ('R', 'R'),
+        ('NC', 'NC')
+    ], label='рейтинги', required=False, help_text='''Рейтинг G — General audiences:
+Фильм демонстрируется без ограничений. Данный рейтинг показывает, что оценённый фильм не содержит ничего, что большинство родителей могло бы посчитать неприемлемым для просмотра или прослушивания даже самыми маленькими детьми. Обнажение, сексуальные сцены и сцены приёма наркотиков отсутствуют; насилие минимально; могут употребляться выражения, выходящие за пределы вежливой беседы, но только те, которые постоянно встречаются в повседневной речи. Более грубая лексика в фильмах с рейтингом G употребляться не может.
+
+Рейтинг PG — Parental guidance suggested:
+Детям рекомендуется смотреть фильм с родителями. Некоторые материалы могут не подходить для детей. Этот рейтинг показывает, что родители могут найти некоторые из сцен в фильме неподходящими для детей и что родителям рекомендуется посмотреть фильм, прежде чем показывать его детям. Явные сексуальные сцены и сцены употребления наркотиков отсутствуют; нагота, если присутствует, только в очень ограниченной степени, могут быть использованы лёгкие ругательства и представлены сцены насилия, но только в очень умеренных количествах.
+
+Рейтинг PG-13 — Parents strongly cautioned:
+Просмотр не желателен детям до 13 лет. Данный рейтинг показывает, что оценённый фильм может быть неподходящим для детей. Родители должны быть особенно осторожны, разрешая своим маленьким детям просмотр. Может присутствовать умеренное или грубое насилие; могут присутствовать сцены с наготой; возможны ситуации с сексуальным контекстом; могут присутствовать некоторые сцены употребления наркотиков; можно услышать единичные употребления грубых ругательств.
+
+Рейтинг R — Restricted:
+Лица, не достигшие 17-летнего возраста, допускаются на фильм только в сопровождении одного из родителей, либо законного представителя. Данный рейтинг показывает, что оценочная комиссия заключила, что некоторый материал оценённого фильма предназначается только для взрослых. Родители должны больше узнать о фильме, прежде чем взять на его просмотр подростков. Рейтинг R может быть назначен из-за частого употребления непристойной лексики, продолжительных сцен насилия, полового акта или употребления наркотиков.
+
+Рейтинг NC-17 — No One 17 & Under Admitted:
+Лица 17-летнего возраста и младше на фильм не допускаются. Данный рейтинг показывает, что оценочная комиссия полагает, что по мнению большинства родителей фильм явно для взрослых, и детей до 17 лет нельзя допускать до просмотра. Фильм может содержать явные сексуальные сцены, большое количество непристойной и сексуальной лексики, или сцен чрезмерного насилия. Рейтинг NC-17, однако, ещё не означает, что данный фильм является непристойным или порнографическим, как в повседневном, так и в юридическом смысле этих слов.''')
+
+    exclude_action = forms.BooleanField(label='исключить: экшн', required=False)
+    exclude_adventure = forms.BooleanField(label='исключить: приключения', required=False)
+    exclude_animation = forms.BooleanField(label='исключить: мультфильм', required=False)
+    exclude_biography = forms.BooleanField(label='исключить: биография', required=False)
+    exclude_comedy = forms.BooleanField(label='исключить: комедия', required=False)
+    exclude_crime = forms.BooleanField(label='исключить: криминал', required=False)
+    exclude_documentary = forms.BooleanField(label='исключить: документальный фильм', required=False)
+    exclude_drama = forms.BooleanField(label='исключить: драма', required=False)
+    exclude_family = forms.BooleanField(label='исключить: семейное кино', required=False)
+    exclude_fantasy = forms.BooleanField(label='исключить: фэнтези', required=False)
+    exclude_film_noir = forms.BooleanField(label='исключить: нуар', required=False)
+    exclude_history = forms.BooleanField(label='исключить: исторический фильм', required=False)
+    exclude_horror = forms.BooleanField(label='исключить: ужасы', required=False)
+    exclude_musical = forms.BooleanField(label='исключить: мюзикл', required=False)
+    exclude_mystery = forms.BooleanField(label='исключить: детектив', required=False)
+    exclude_romance = forms.BooleanField(label='исключить: романтика', required=False)
+    exclude_sci_fi = forms.BooleanField(label='исключить: научная фантастика', required=False)
+    exclude_sport = forms.BooleanField(label='исключить: о спорте', required=False)
+    exclude_thriller = forms.BooleanField(label='исключить: триллер', required=False)
+    exclude_western = forms.BooleanField(label='исключить: вестерн', required=False)
+
 
 

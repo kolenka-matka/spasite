@@ -102,13 +102,17 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
 
             genres = [adventure, animation, biography, comedy, crime, documentary, drama, family, action,
                       fantasy, film_noir, history, horror, musical, mystery, romance, sci_fi, sport, thriller, western]
-            selection = str()
+            selection = list()
             selected_genres = [item[0].replace('_', '-') for item in genres if item[1] == True]
             if selected_genres:
-                selection += 'вы выбрали следующие жанры: ' + ', '.join(selected_genres)
+                selection.append('вы выбрали следующие жанры: ' + ', '.join(selected_genres))
             countries = form.cleaned_data.get('country')
             if countries:
-                selection += '\nвы выбрали следующие страны: ' + ', '.join(countries)
+                selection.append('вы выбрали следующие страны: ' + ', '.join(countries))
+
+            ratings = form.cleaned_data.get('ratings')
+            if ratings:
+                selection.append('вы выбрали рейтинги ' + ', '.join(ratings))
 
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ИСКЛЮЧИТЬ ЖАНРЫ !!!!!!!!!!!!!
             exclude_action = ('action', form.cleaned_data.get('exclude_action'))
@@ -137,11 +141,12 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                               exclude_musical, exclude_mystery, exclude_romance, exclude_sci_fi, exclude_sport, exclude_thriller, exclude_western}
             exclude_genres = {item[0].replace('_', '-') for item in exclude_genres if item[1] == True}
             if exclude_genres:
-                selection += '\nвы исключили следующие жанры: ' + ', '.join(exclude_genres)
+                selection.append('вы исключили следующие жанры: ' + ', '.join(exclude_genres))
 
             plot = form.cleaned_data.get('plot')
 
-            return render(request, 'search/movies_results.html', {'temp': create_request(selected_genres=selected_genres, countries=countries, exclude_genres=exclude_genres, plot=plot), 'selection': selection})
+            return render(request, 'search/movies_results.html',
+                          {'temp': create_request(selected_genres, countries, exclude_genres, plot, ratings), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
