@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'girorp'
+    'girorp',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

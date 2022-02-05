@@ -1,15 +1,91 @@
+{% load widget_tweaks %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>поиск фильмов</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 </head>
+
+
+<header class="header_dark">
+    <div class="container">
+        <div class="header_inner">
+                <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+
+                <nav class="nav">
+                    <a class="nav_link" href="{% url "movies" %}">Films</a>
+                    <a class="nav_link" href="#">Books</a>
+                    <a class="nav_link" href="#">Games</a>
+                    <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
 <body>
+
+    <div class="films_box">
     <form method="post">
         {% csrf_token %}
 
-        {{ form.as_p }}
-        <input type="submit" value="submit">
+        <!-- <div class="genres">{{ form.ratings }}</div> -->
+<!-- 
+        {% for genre in form.genres %}
+            {{ form.genre }}"
+        {% endfor %}
+        <br> -->
+
+        {% for field in form %}
+            <!-- {{ field }} -->
+            <label clss="genres">{{ field.label }}</label>
+            {% render_field field class="genres" %}
+            <br>
+            <br>
+        {% endfor %}
+
+        <br>
+
+        <input class="btn_login" type="submit" value="submit">
     </form>
+</div>
+
+
+
 </body>
+
+<br>
+
+<footer>
+    <div class="footer-content">
+        <h1>Girorp</h1>
+    </div>
+
+
+    <div class="footer-bottom">
+        <h3>get incredible reviews only recommended priority</h3>
+        <p>©2021—2022 project</p>
+    </div>
+</footer>
+
+
+
+
+
 </html>
