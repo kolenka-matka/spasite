@@ -17,8 +17,8 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set(), p
         url = url + "&countries=" + countries
 
     if actors:
-        actors = ','.join(actors)
-        url = url + "&role=" + actors
+        actors = ','.join((actor.split('/')[-1] for actor in actors))
+        url = url + "&role=" + actors.split('/')[-1]
 
     if plot:
         translator = Translator()
@@ -27,7 +27,6 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set(), p
         plot = '+'.join(plot)
         url = url + "&plot=" + plot
 
-    # ?certificates=US%3AG,US%3APG,US%3APG-13,US%3AR
     if ratings:
         ratings = ','.join((item + 'US%3A' for item in ratings))
         url = url + '&certificates' + ratings
@@ -41,7 +40,7 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set(), p
 
     for item in found:
         name = item.find("a").text
-        src = item.find
+        link = "https://www.imdb.com" + item.find('h3', class_="lister-item-header").find('a').get('href')
         year = item.find('span', class_="lister-item-year text-muted unbold").text
         length_in_min = item.find('span', class_="runtime")
         genre = str()

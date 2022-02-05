@@ -111,8 +111,6 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                 selection.append('вы выбрали следующие страны: ' + ', '.join(countries))
 
             actors = form.cleaned_data.get('actors')
-            if actors:
-                selection.append('вы выбрали следующих актеров: ' + ', '.join(actors))
 
             ratings = form.cleaned_data.get('ratings')
             if ratings:
