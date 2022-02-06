@@ -512,20 +512,23 @@ body#login {
 
 /*MOVIES_CHOISE.HTML --------------------------------------------*/
 
-.genres{
+.genres {
 	/*color: #7E43E1;*/
-	font-size: 20px;
+	/*font-size: 10px;*/
 	font-weight: 700;
 	text-align: center;
 	line-height: 1;
 	padding: 10px;
+	/*text-transform: uppercase;*/
 }
 
-label {
+label{
+	/*text-transform: uppercase;*/
 	text-align: center;
-	color: #7E43E1;
+	color: #000;
+	text-decoration-color: #000;
 	font-family: 'Poppins', sans-serif;
-	font-size: 20px;
+	font-size: 10px;
 }
 
 .films_box{
@@ -545,11 +548,32 @@ label {
 	transfrom: translate(-50%, -50%);*/
 	background: #EFEFEF;
 	color: #000;
-	font-size: 20px;
+	/*font-size: 20px;*/
 
 	text-align: left;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+
+
+/*MOVIES_RESULTS.HTML -------------------------------------*/
+.film-name {
+	color: #7E43E1;
+	font-size: 10px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 1;
+	padding: 10px;
+
+}
+
+body#res {
+	background: #000; 
+	color: #fff;
+	padding: 0;
+	margin: 0;
+	font-family: 'Poppins', sans-serif;
 }

@@ -45,17 +45,11 @@
     <form method="post">
         {% csrf_token %}
 
-        <!-- <div class="genres">{{ form.ratings }}</div> -->
-<!-- 
-        {% for genre in form.genres %}
-            {{ form.genre }}"
-        {% endfor %}
-        <br> -->
-
         {% for field in form %}
             <!-- {{ field }} -->
-            <label clss="genres">{{ field.label }}</label>
+            <label class="genres">{{ field.label }}</label>
             {% render_field field class="genres" %}
+            <!-- <p>{{ field.help_text}}</p> -->
             <br>
             <br>
         {% endfor %}
@@ -83,9 +77,6 @@
         <p>©2021—2022 project</p>
     </div>
 </footer>
-
-
-
 
 
 </html>

@@ -1,10 +1,44 @@
+{% load widget_tweaks %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>найденные фильмы</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
-<body>
+
+<header class="header_dark">
+    <div class="container">
+        <div class="header_inner">
+                <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+
+                <nav class="nav">
+                    <a class="nav_link" href="{% url "movies" %}">Films</a>
+                    <a class="nav_link" href="#">Books</a>
+                    <a class="nav_link" href="#">Games</a>
+                    <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<body id="res">
 
 <tr>
 {% for item in selection %}
@@ -17,7 +51,7 @@
 {% for i in temp %}
 <tr>
     <!-- <p> Name: <a href="https://www.imdb.com/title/tt9032400/"> <td>{{ i.name }}</td> </a></p> -->
-    <p> Name: <td>{{ i.name }}</td> </p>
+    <p> Name: <td class="film-name">{{ i.name }}</td> </p>
     <p> Year: <td>{{ i.year }}</td> </p>
     <p> Genres: <td>{{ i.genre }}</td> </p>
     <p> Summary: <td>{{ i.summary }}</td> </p>
@@ -26,4 +60,20 @@
 {% endfor %}
 
 </body>
+
+
+<footer>
+    <div class="footer-content">
+        <h1>Girorp</h1>
+    </div>
+
+
+    <div class="footer-bottom">
+        <h3>get incredible reviews only recommended priority</h3>
+        <p>©2021—2022 project</p>
+    </div>
+</footer>
+
+
+
 </html><table>
