@@ -79,6 +79,36 @@
         <p><label class="genres">{{ form.plot.label }}</label>{% render_field form.plot class="genres" %}</p>
         <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}</p>
 
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.exclude_action class="genres" %}<label class="genres">{{ form.exclude_action.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_adventure class="genres" %}<label class="genres">{{ form.exclude_adventure.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_animation class="genres" %}<label class="genres">{{ form.exclude_animation.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_biography class="genres" %}<label class="genres">{{ form.exclude_biography.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_comedy class="genres" %}<label class="genres">{{ form.exclude_comedy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_crime class="genres" %}<label class="genres">{{ form.exclude_crime.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_documentary class="genres" %}<label class="genres">{{ form.exclude_documentary.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_drama class="genres" %}<label class="genres">{{ form.exclude_drama.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_family class="genres" %}<label class="genres">{{ form.exclude_family.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_fantasy class="genres" %}<label class="genres">{{ form.exclude_fantasy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_film_noir class="genres" %}<label class="genres">{{ form.exclude_film_noir.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_history class="genres" %}<label class="genres">{{ form.exclude_history.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_horror class="genres" %}<label class="genres">{{ form.exclude_horror.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_musical class="genres" %}<label class="genres">{{ form.exclude_musical.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_mystery class="genres" %}<label class="genres">{{ form.exclude_mystery.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_romance class="genres" %}<label class="genres">{{ form.exclude_romance.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_sci_fi class="genres" %}<label class="genres">{{ form.exclude_sci_fi.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_sport class="genres" %}<label class="genres">{{ form.exclude_sport.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_thriller class="genres" %}<label class="genres">{{ form.exclude_thriller.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_western class="genres" %}<label class="genres">{{ form.western.label }}</label></td>
+            </tr>
+        </table>
 
         <input class="btn_login" type="submit" value="submit">
     </form>
