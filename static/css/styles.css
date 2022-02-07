@@ -1,7 +1,5 @@
 body {
-    margin: 0;
 	font-family: 'Poppins', sans-serif;
-
 	font-size: 15px;
 	color: #333;
 	line-height: 1.6;
@@ -510,7 +508,7 @@ body#login {
 }
 
 
-/*MOVIES_CHOISE.HTML --------------------------------------------*/
+/*MOVIES_CHOICE.HTML --------------------------------------------*/
 
 .genres {
 	/*color: #7E43E1;*/

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>найденные фильмы</title>
+    <title>результаты поиска</title>
     <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,47 +19,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
+<body>
+
 <header class="header_dark">
     <div class="container">
         <div class="header_inner">
-                <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+            <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">Films</a>
+                <a class="nav_link" href="#">Books</a>
+                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
 
-                <nav class="nav">
-                    <a class="nav_link" href="{% url "movies" %}">Films</a>
-                    <a class="nav_link" href="#">Books</a>
-                    <a class="nav_link" href="#">Games</a>
-                    <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
-                    
-                </nav>
-            </div>
+            </nav>
         </div>
     </div>
 </header>
 
+<div id="wrapper" style="margin: 10px;">
+    <tr>
+    {% for item in selection %}
+        <p>
+            {{ item }}
+        </p>
+    {% endfor %}
+    </tr>
 
-
-<body id="res">
-
-<tr>
-{% for item in selection %}
-    <p>
-        {{ item }}
-    </p>
-{% endfor %}
-</tr>
-
-{% for i in temp %}
-<tr>
-    <p> название фильма: <td class="film-name">{{ i.name }}</td> </p>
-    <p> год: <td>{{ i.year }}</td> </p>
-    <p> жанры: <td>{{ i.genre }}</td> </p>
-    <p> описание: <td>{{ i.summary }}</td> </p>
-    <br>
-</tr>
-{% endfor %}
-
-</body>
-
+    {% for i in temp %}
+    <tr>
+        <p><b>название фильма: <td class="film-name">{{ i.name }}</td></b></p>
+        <p> год: <td>{{ i.year }}</td> </p>
+        <p> жанры: <td>{{ i.genre }}</td> </p>
+        <p> описание: <td>{{ i.summary }}</td> </p>
+        <br>
+    </tr>
+    {% endfor %}
+</div>
 
 <footer>
     <div class="footer-content">
@@ -73,6 +68,6 @@
     </div>
 </footer>
 
+</body>
 
-
-</html><table>
+</html>

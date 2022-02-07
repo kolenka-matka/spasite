@@ -98,9 +98,9 @@ class MoviesChoiceForm(forms.Form):
     exclude_western = forms.BooleanField(label='исключить: вестерн', required=False)
 
     # !!!!!!!!!!!!!!!!!!!!!! КНИГИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    russian = forms.BooleanField(label='книги только на русском языке', required=False)
+    '''russian = forms.BooleanField(label='книги только на русском языке', required=False)
     keywords = forms.CharField(label='введите здесь ключевые слова')
     exclude_keywords = forms.CharField(label='убрать из результатов поиска книги со словами')
     author = forms.CharField(label='отобразить книги, написанные')
     date_from = forms.DateField(label='c')
-    date_to = forms.DateField(label='до')
+    date_to = forms.DateField(label='до')'''
