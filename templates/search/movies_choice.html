@@ -43,15 +43,42 @@
 <div class="films_box">
     <form method="post">
         {% csrf_token %}
-        {% for field in form %}
-            <!-- {{ field }} -->
-            <label class="genres">{{ field.label }}</label>
-            {% render_field field class="genres" %}
-            <br>
-            <br>
-        {% endfor %}
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.action class="genres" %}<label class="genres">{{ form.action.label }}</label></td>
+                <td width="20%">{% render_field form.adventure class="genres" %}<label class="genres">{{ form.adventure.label }}</label></td>
+                <td width="20%">{% render_field form.animation class="genres" %}<label class="genres">{{ form.animation.label }}</label></td>
+                <td width="20%">{% render_field form.biography class="genres" %}<label class="genres">{{ form.biography.label }}</label></td>
+                <td width="20%">{% render_field form.comedy class="genres" %}<label class="genres">{{ form.comedy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.crime class="genres" %}<label class="genres">{{ form.crime.label }}</label></td>
+                <td width="20%">{% render_field form.documentary class="genres" %}<label class="genres">{{ form.documentary.label }}</label></td>
+                <td width="20%">{% render_field form.drama class="genres" %}<label class="genres">{{ form.drama.label }}</label></td>
+                <td width="20%">{% render_field form.family class="genres" %}<label class="genres">{{ form.family.label }}</label></td>
+                <td width="20%">{% render_field form.fantasy class="genres" %}<label class="genres">{{ form.fantasy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.film_noir class="genres" %}<label class="genres">{{ form.film_noir.label }}</label></td>
+                <td width="20%">{% render_field form.history class="genres" %}<label class="genres">{{ form.history.label }}</label></td>
+                <td width="20%">{% render_field form.horror class="genres" %}<label class="genres">{{ form.horror.label }}</label></td>
+                <td width="20%">{% render_field form.musical class="genres" %}<label class="genres">{{ form.musical.label }}</label></td>
+                <td width="20%">{% render_field form.mystery class="genres" %}<label class="genres">{{ form.mystery.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.romance class="genres" %}<label class="genres">{{ form.romance.label }}</label></td>
+                <td width="20%">{% render_field form.sci_fi class="genres" %}<label class="genres">{{ form.sci_fi.label }}</label></td>
+                <td width="20%">{% render_field form.sport class="genres" %}<label class="genres">{{ form.sport.label }}</label></td>
+                <td width="20%">{% render_field form.thriller class="genres" %}<label class="genres">{{ form.thriller.label }}</label></td>
+                <td width="20%">{% render_field form.western class="genres" %}<label class="genres">{{ form.western.label }}</label></td>
+            </tr>
+        </table>
 
-        <br>
+        <p><label class="genres">{{ form.country.label }}</label>{% render_field form.country class="genres" %}</p>
+        <p><label class="genres">{{ form.actors.label }}</label>{% render_field form.actors class="genres" %}</p>
+        <p><label class="genres">{{ form.plot.label }}</label>{% render_field form.plot class="genres" %}</p>
+        <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}</p>
+
 
         <input class="btn_login" type="submit" value="submit">
     </form>
