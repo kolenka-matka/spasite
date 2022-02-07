@@ -27,9 +27,7 @@
             <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Monsterrat</a></div>
 
             <nav class="nav">
-                <a class="nav_link" href="{% url "movies" %}">Films</a>
-                <a class="nav_link" href="#">Books</a>
-                <a class="nav_link" href="#">Games</a>
+                <a class="nav_link" href="{% url "movies" %}">поиск</a>
                 <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
 
             </nav>
@@ -77,7 +75,7 @@
         <p><label class="genres">{{ form.country.label }}</label>{% render_field form.country class="genres" %}</p>
         <p><label class="genres">{{ form.actors.label }}</label>{% render_field form.actors class="genres" %}</p>
         <p><label class="genres">{{ form.plot.label }}</label>{% render_field form.plot class="genres" %}</p>
-        <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}</p>
+        <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}{{form.ratings.helptext}}</p>
 
         <table>
             <tr>
