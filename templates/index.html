@@ -10,9 +10,6 @@
     <title>Главная страница</title>
     <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,13 +25,11 @@
 <header class="header">
     <div class="container">
         <div class="header_inner">
-            <div class="header_logo">Girorp</div>
+            <div class="header_logo">Monsterrat</div>
 
             <nav class="nav">
-                <a class="nav_link" href="{% url "movies" %}">Films</a>
-                <a class="nav_link" href="#">Books</a>
-                <a class="nav_link" href="#">Games</a>
-                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                <a class="nav_link" href="{% url "movies" %}">поиск</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
                 
             </nav>
         </div>
@@ -53,10 +48,10 @@
             <h1 class="intro_title">Welcome, my dudes</h1>
         </div>
     {% if request.user.is_authenticated %}
-        <a class="btn" href="{% url "logout" %}">Log Out</a>
+        <a class="btn" href="{% url "logout" %}">выйти из аккаунта</a>
     {% else %}
-        <a class="btn" href="{% url "login" %}">Log In</a>
-        <a class="btn" href="{% url "signin" %}">Sign Up</a>
+        <a class="btn" href="{% url "login" %}">войти в аккаунт</a>
+        <a class="btn" href="{% url "signin" %}">создать аккаунт</a>
     {% endif %}
         <!-- <h1>Наш сайт</h1> -->
     </div>
@@ -64,30 +59,15 @@
 
 <div class="information">
     <p>Наш сайт позволяет пользователям легко находить интересный им контент и отсеивать все лишнее. Большой выбор категорий, понятные меню и интерфейс делают наш сайт быстрым и удобным поисковиком книг, фильмов, подкастов и игр любых жанров и франшиз.
-    <br> 
-    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque porta placerat libero, sit amet fringilla turpis pellentesque et. Fusce sed risus vitae est porta sagittis. Cras in ex vitae diam scelerisque lobortis ac nec nunc. Nullam et lacinia nibh. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 </div>
 
 <br>
 <br>
 <br>
 
-<!-- {% if request.user.is_authenticated %}
-    <ul class="menu">
-        <a href="{% url 'dashboard' %}">My dashboard</a>
-        </li>
-    </ul>
-{% endif %}
- --><!-- <p>If you don't have an account, <a href="{% url "signin" %}">sign up here</a></p>
-<span class="user">
-
-</span> -->
-<!-- 
-<a href="{% url "movies" %}"> Movies</a> -->
-
 <footer>
     <div class="footer-content">
-        <h1>Girorp</h1>
+        <h1>Monsterrat</h1>
     </div>
 
 

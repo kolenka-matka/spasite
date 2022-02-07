@@ -9,19 +9,17 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
 </head>
 
 <header class="header">
     <div class="container">
         <div class="header_inner">
-            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Girorp</a></div>
+            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Monsterrat</a></div>
 
             <nav class="nav">
-                <a class="nav_link" href="{% url "movies" %}">Films</a>
-                <a class="nav_link" href="#">Books</a>
-                <a class="nav_link" href="#">Games</a>
-                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                <a class="nav_link" href="{% url "movies" %}">поиск</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
                 
             </nav>
         </div>
@@ -39,14 +37,14 @@
                         Please try again.
                     </p>
                 {% else %}
-                    <p>Please, use the following form to log in:</p>
+                    <p>Пожалуйста, заполните форму ниже, чтобы войти в аккаунт:</p>
                 {% endif %}
 
 
                 {{ form.as_p }}
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
-                <p><input class="btn_login" type="submit" value="Log in"></p>
+                <p><input class="btn_login" type="submit" value="войти"></p>
             </form>
         </div>
 

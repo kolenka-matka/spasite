@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Неверный логин</title>
-        <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
 </head>
 
 <header class="header">
     <div class="container">
         <div class="header_inner">
-            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Girorp</a></div>
+            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Monsterrat</a></div>
 
             <nav class="nav">
-                <a class="nav_link" href="{% url "movies" %}">Films</a>
-                <a class="nav_link" href="#">Books</a>
-                <a class="nav_link" href="#">Games</a>
-                <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
+                <a class="nav_link" href="{% url "movies" %}">поиск</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
                 
             </nav>
         </div>
@@ -31,7 +29,7 @@
 
 <div class="login-form">
     <div class="box">
-        <h1 class="login-form">Oops :(</h1>
+        <h1 class="login-form">:(</h1>
         <div class="for_text">
             <b>Такого логина нет в нашей базе данных! 
             <br> Но ничего, Вы можете <a class="regular_link" href="{% url "signin" %}">создать новый аккаунт</a> или
@@ -39,8 +37,8 @@
         </div>
         <br>
         <br>
-        <a class="btn_login" href="{% url "login" %}">Log In</a>
-        <a class="btn_login" href="{% url "signin" %}">Sign Up</a>
+        <a class="btn_login" href="{% url "login" %}">войти</a>
+        <a class="btn_login" href="{% url "signin" %}">создать аккаунт</a>
     </div>
 </div>
 </body>
