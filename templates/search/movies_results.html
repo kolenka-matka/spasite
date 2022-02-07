@@ -50,11 +50,10 @@
 
 {% for i in temp %}
 <tr>
-    <!-- <p> Name: <a href="https://www.imdb.com/title/tt9032400/"> <td>{{ i.name }}</td> </a></p> -->
-    <p> Name: <td class="film-name">{{ i.name }}</td> </p>
-    <p> Year: <td>{{ i.year }}</td> </p>
-    <p> Genres: <td>{{ i.genre }}</td> </p>
-    <p> Summary: <td>{{ i.summary }}</td> </p>
+    <p> название фильма: <td class="film-name">{{ i.name }}</td> </p>
+    <p> год: <td>{{ i.year }}</td> </p>
+    <p> жанры: <td>{{ i.genre }}</td> </p>
+    <p> описание: <td>{{ i.summary }}</td> </p>
     <br>
 </tr>
 {% endfor %}

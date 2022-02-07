@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'girorp',
     'widget_tweaks',
+    'dal',
+    'dal_select2',
 ]
 
 MIDDLEWARE = [

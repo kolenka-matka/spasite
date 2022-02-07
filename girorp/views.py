@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from .create_request import create_request
 from .forms import LoginForm, UserRegistrationForm, MoviesChoiceForm
+from dal import autocomplete
+from .lists import actors_list
+
 
 
 def index(request):
@@ -77,7 +80,7 @@ def password_change_done(request):
 def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
     form = MoviesChoiceForm(request.POST)
     if request.method == 'POST':
-        if form.is_valid() and form.is_valid():
+        if form.is_valid():
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ЖАНРЫ !!!!!!!!!!!!!
             action = ('action', form.cleaned_data.get('action'))
             adventure = ('adventure', form.cleaned_data.get('adventure'))

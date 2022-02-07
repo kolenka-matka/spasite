@@ -1,9 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# from django.conf.urls import url
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 urlpatterns = [
@@ -18,6 +16,5 @@ urlpatterns = [
     path('password-change/', 'django.contrib.auth.views.password_change', name='password_change'),
     path('password-change/done/$', 'django.contrib.auth.views.password_change_done', name='password_change_done'),
     path('search/movies_choice/', views.choose_movies, name='movies'),
-    path('testing/', views.tests, name='tests')
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    path('testing/', views.tests, name='tests'),
 ]

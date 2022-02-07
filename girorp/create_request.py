@@ -56,3 +56,23 @@ def create_request(selected_genres=None, countries=None, exclude_genres=set(), p
         dic = {'name': name, 'year': year, 'genre': genre, "summary": summary}
         output.append(dic)
     return output
+
+def books_create_request(russian=None, keywords=None, exclude_keywords=None, author=None, date_from=None, date_to=None):
+    url = "https://www.google.ru/search?hl=ru&tbo=p&tbm=bks&q="
+    if russian:
+        url='https://www.google.ru/search?lr=lang_ru&hl=ru&tbo=p&tbm=bks&q='
+    tags = list()
+    if keywords:
+        tags.extend(keywords.lower().split())
+    if exclude_keywords:
+        tags.extend(('-' + item for item in keywords.lower().split()))
+    if author:
+        tags.extend(('inauthor:' + item.lower() for item in author.lower().split()))
+    tags = '+'.join(tags)
+
+
+    url += tags
+    text_ = requests.get(url).text
+    print(url)
+
+    soup = BeautifulSoup(text_, 'lxml')
