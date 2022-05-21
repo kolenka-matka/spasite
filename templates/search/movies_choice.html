@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,16 +24,13 @@
 <header class="header_dark">
     <div class="container">
         <div class="header_inner">
-                <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Girorp</a></div>
+            <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Monsterrat</a></div>
 
-                <nav class="nav">
-                    <a class="nav_link" href="{% url "movies" %}">Films</a>
-                    <a class="nav_link" href="#">Books</a>
-                    <a class="nav_link" href="#">Games</a>
-                    <a class="nav_link" href="{% url 'dashboard' %}">Account</a>
-                    
-                </nav>
-            </div>
+            <nav class="nav">
+                <a class="nav_link" href="{% url "movies" %}">поиск</a>
+                <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
+
+            </nav>
         </div>
     </div>
 </header>
@@ -41,21 +38,91 @@
 
 <body>
 
-    <div class="films_box">
+<div class="films_box">
     <form method="post">
         {% csrf_token %}
+        {% render_field form.movies class="genres" %}<label class="genres">{{ form.movies.label }}</label>
+        {% render_field form.tv_series class="genres" %}<label class="genres">{{ form.tv_series.label }}</label>
+        <p>{% render_field form.podcasts class="genres" %}<label class="genres">{{ form.podcasts.label }}</label></p>
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.action class="genres" %}<label class="genres">{{ form.action.label }}</label></td>
+                <td width="20%">{% render_field form.adventure class="genres" %}<label class="genres">{{ form.adventure.label }}</label></td>
+                <td width="20%">{% render_field form.animation class="genres" %}<label class="genres">{{ form.animation.label }}</label></td>
+                <td width="20%">{% render_field form.biography class="genres" %}<label class="genres">{{ form.biography.label }}</label></td>
+                <td width="20%">{% render_field form.comedy class="genres" %}<label class="genres">{{ form.comedy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.crime class="genres" %}<label class="genres">{{ form.crime.label }}</label></td>
+                <td width="20%">{% render_field form.documentary class="genres" %}<label class="genres">{{ form.documentary.label }}</label></td>
+                <td width="20%">{% render_field form.drama class="genres" %}<label class="genres">{{ form.drama.label }}</label></td>
+                <td width="20%">{% render_field form.family class="genres" %}<label class="genres">{{ form.family.label }}</label></td>
+                <td width="20%">{% render_field form.fantasy class="genres" %}<label class="genres">{{ form.fantasy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.film_noir class="genres" %}<label class="genres">{{ form.film_noir.label }}</label></td>
+                <td width="20%">{% render_field form.history class="genres" %}<label class="genres">{{ form.history.label }}</label></td>
+                <td width="20%">{% render_field form.horror class="genres" %}<label class="genres">{{ form.horror.label }}</label></td>
+                <td width="20%">{% render_field form.musical class="genres" %}<label class="genres">{{ form.musical.label }}</label></td>
+                <td width="20%">{% render_field form.mystery class="genres" %}<label class="genres">{{ form.mystery.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.romance class="genres" %}<label class="genres">{{ form.romance.label }}</label></td>
+                <td width="20%">{% render_field form.sci_fi class="genres" %}<label class="genres">{{ form.sci_fi.label }}</label></td>
+                <td width="20%">{% render_field form.sport class="genres" %}<label class="genres">{{ form.sport.label }}</label></td>
+                <td width="20%">{% render_field form.thriller class="genres" %}<label class="genres">{{ form.thriller.label }}</label></td>
+                <td width="20%">{% render_field form.western class="genres" %}<label class="genres">{{ form.western.label }}</label></td>
+            </tr>
+        </table>
 
-        {% for field in form %}
-            <!-- {{ field }} -->
-            <label class="genres">{{ field.label }}</label>
-            {% render_field field class="genres" %}
-            <!-- <p>{{ field.help_text}}</p> -->
-            <br>
-            <br>
-        {% endfor %}
+        <p><label class="genres">{{ form.country.label }}</label>{% render_field form.country class="genres" %}</p>
+        <p><label class="genres">{{ form.actors.label }}</label>{% render_field form.actors class="genres" %}</p>
+        <p><label class="genres">{{ form.plot.label }}</label>{% render_field form.plot class="genres" %}</p>
+        <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}{{form.ratings.helptext}}</p>
 
-        <br>
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.exclude_action class="genres" %}<label class="genres">{{ form.exclude_action.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_adventure class="genres" %}<label class="genres">{{ form.exclude_adventure.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_animation class="genres" %}<label class="genres">{{ form.exclude_animation.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_biography class="genres" %}<label class="genres">{{ form.exclude_biography.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_comedy class="genres" %}<label class="genres">{{ form.exclude_comedy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_crime class="genres" %}<label class="genres">{{ form.exclude_crime.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_documentary class="genres" %}<label class="genres">{{ form.exclude_documentary.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_drama class="genres" %}<label class="genres">{{ form.exclude_drama.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_family class="genres" %}<label class="genres">{{ form.exclude_family.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_fantasy class="genres" %}<label class="genres">{{ form.exclude_fantasy.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_film_noir class="genres" %}<label class="genres">{{ form.exclude_film_noir.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_history class="genres" %}<label class="genres">{{ form.exclude_history.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_horror class="genres" %}<label class="genres">{{ form.exclude_horror.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_musical class="genres" %}<label class="genres">{{ form.exclude_musical.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_mystery class="genres" %}<label class="genres">{{ form.exclude_mystery.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.exclude_romance class="genres" %}<label class="genres">{{ form.exclude_romance.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_sci_fi class="genres" %}<label class="genres">{{ form.exclude_sci_fi.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_sport class="genres" %}<label class="genres">{{ form.exclude_sport.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_thriller class="genres" %}<label class="genres">{{ form.exclude_thriller.label }}</label></td>
+                <td width="20%">{% render_field form.exclude_western class="genres" %}<label class="genres">{{ form.western.label }}</label></td>
+            </tr>
+        </table>
+        <p></p>
+        <p>{% render_field form.games class="genres" %}<label class="genres">{{ form.games.label }}</label></p>
+        <p>{% render_field form.books class="genres" %}<label class="genres">{{ form.books.label }}</label></p>
 
+        <p>{% render_field form.russian class="genres" %}<label class="genres">{{ form.russian.label }}</label></p>
+        <p>{% render_field form.keywords class="genres" %}<label class="genres">{{ form.keywords.label }}</label></p>
+        <p>{% render_field form.exclude_keywords class="genres" %}<label class="genres">{{ form.exclude_keywords.label }}</label></p>
+        <p>{% render_field form.author class="genres" %}<label class="genres">{{ form.author.label }}</label></p>
+        выбрать книги, написанные
+        <label class="genres">{{ form.date_from.label }}</label>{% render_field form.date_from class="genres" %}
+        <label class="genres">{{ form.date_to.label }}</label>{% render_field form.date_to class="genres" %}
+
+        <p></p>
         <input class="btn_login" type="submit" value="submit">
     </form>
 </div>
@@ -68,7 +135,7 @@
 
 <footer>
     <div class="footer-content">
-        <h1>Girorp</h1>
+        <h1>Monsterrat</h1>
     </div>
 
 
@@ -77,6 +144,9 @@
         <p>©2021—2022 project</p>
     </div>
 </footer>
+
+
+
 
 
 </html>

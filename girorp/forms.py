@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import NonOrdinaryUser
 from django.contrib.auth.models import User
-from .lists import ratings_help_text, actors_list, countries_list
-
+from .lists import ratings_help_text, actors_list, countries_list, book_genres_list
+import cchardet
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -24,8 +24,8 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    password = forms.CharField(label='пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='повторите пароль', widget=forms.PasswordInput)
 
     class Meta:
         model = NonOrdinaryUser
@@ -96,3 +96,16 @@ class MoviesChoiceForm(forms.Form):
     exclude_sport = forms.BooleanField(label='исключить: о спорте', required=False)
     exclude_thriller = forms.BooleanField(label='исключить: триллер', required=False)
     exclude_western = forms.BooleanField(label='исключить: вестерн', required=False)
+
+    russian = forms.BooleanField(label='книги только на русском языке', required=False)
+    keywords = forms.CharField(label='введите здесь ключевые слова')
+    exclude_keywords = forms.CharField(label='убрать из результатов поиска книги со словами')
+    author = forms.CharField(label='отобразить книги, написанные')
+    date_from = forms.DateField(label='c')
+    date_to = forms.DateField(label='до')
+
+    tv_series = forms.BooleanField(label='сериалы', required=False)
+    movies = forms.BooleanField(label='фильмы', required=False)
+    games = forms.BooleanField(label='игры', required=False)
+    books = forms.BooleanField(label='книги', required=False)
+    podcasts = forms.BooleanField(label='подкасты', required=False)
