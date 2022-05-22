@@ -3,17 +3,21 @@ from bs4 import BeautifulSoup
 from googletrans import Translator
 
 
-def create_request(selected_category=None, selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
+def create_request(selected_books=None, selected_category=None, selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
     print(selected_category)
 
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # !!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     """
+    url = ""
     
     if selected_category == 'movies' or selected_category == 'tv_series':
         url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
+    elif selected_category == 'book':
+        url = "https://www.litres.ru"
+
     """
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # !!!!!!!!!!!!!!!!!!-- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
@@ -40,6 +44,13 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
     if ratings:
         ratings = ','.join((item + 'US%3A' for item in ratings))
         url = url + '&certificates' + ratings
+
+
+    # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!
+    if selected_books:
+        book_genres = ','.join(selected_books)
+        url = url + book_genres + "elektronnie-knigi/"
+    # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!
 
     text_ = requests.get(url).text
     print(url)

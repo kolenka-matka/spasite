@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import NonOrdinaryUser
 from django.contrib.auth.models import User
-from .lists import ratings_help_text, actors_list, countries_list, book_genres_list
+from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
 import cchardet
 
 class CustomUserCreationForm(UserCreationForm):
@@ -110,3 +110,34 @@ class MoviesChoiceForm(forms.Form):
     games = forms.BooleanField(label='игры', required=False)
     books = forms.BooleanField(label='книги', required=False)
     podcasts = forms.BooleanField(label='подкасты', required=False)
+
+
+    fantasy_book = forms.BooleanField(label='Фэнтези', required=False)
+    detective_book = forms.BooleanField(label='Детективы', required=False)
+    science_fiction_book = forms.BooleanField(label='Фантастика', required=False)
+    romance_book = forms.BooleanField(label='Любовные романы', required=False)
+    adventure_book = forms.BooleanField(label='Приключения', required=False)
+    horror_book = forms.BooleanField(label='Ужасы/мистика', required=False)
+    manga_book = forms.BooleanField(label='Комиксы/манга', required=False)
+
+    modern_prose_book = forms.BooleanField(label='Современная проза', required=False)
+    classic_book = forms.BooleanField(label='Классическая литература', required=False)
+    poetry_book = forms.BooleanField(label='Поэзия', required=False)
+    biography_book = forms.BooleanField(label='Биография и мемуары', required=False)
+    history_book = forms.BooleanField(label='История', required=False)
+    war_book = forms.BooleanField(label='О войне', required=False)
+    business_book = forms.BooleanField(label='Бизнес', required=False)
+    study_book = forms.BooleanField(label='Учебная и научная литература', required=False)
+    esoteric_book = forms.BooleanField(label='Эзотерика', required=False)
+    dictionary_book = forms.BooleanField(label='Словари', required=False)
+
+    languages_book = forms.BooleanField(label='Изучение языков', required=False)
+    art_book = forms.BooleanField(label='Культура и искусство', required=False)
+    maps_book = forms.BooleanField(label='Путеводители', required=False)
+    psychology_book = forms.BooleanField(label='Психология', required=False)
+    sport_book = forms.BooleanField(label='Спорт', required=False)
+    cooking_book = forms.BooleanField(label='Кулинария', required=False)
+    kids_book = forms.BooleanField(label='Детские книги', required=False)
+    fairytales_book = forms.BooleanField(label='Сказки', required=False)
+    student_book = forms.BooleanField(label='Школьные учебники', required=False)
+    school_book = forms.BooleanField(label='Учебная и научная литература', required=False)

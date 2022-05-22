@@ -40,10 +40,16 @@
 
 <div class="films_box">
     <form method="post">
+        <h3>Выберите категорию поиска:</h3>
         {% csrf_token %}
         {% render_field form.movies class="genres" %}<label class="genres">{{ form.movies.label }}</label>
         {% render_field form.tv_series class="genres" %}<label class="genres">{{ form.tv_series.label }}</label>
-        <p>{% render_field form.podcasts class="genres" %}<label class="genres">{{ form.podcasts.label }}</label></p>
+        {% render_field form.games class="genres" %}<label class="genres">{{ form.games.label }}</label>
+        {% render_field form.books class="genres" %}<label class="genres">{{ form.books.label }}</label>
+        {% render_field form.podcasts class="genres" %}<label class="genres">{{ form.podcasts.label }}</label>
+        <br>
+        <hr>
+        <h3>Выберите жанры:</h3>
         <table>
             <tr>
                 <td width="20%">{% render_field form.action class="genres" %}<label class="genres">{{ form.action.label }}</label></td>
@@ -80,6 +86,9 @@
         <p><label class="genres">{{ form.plot.label }}</label>{% render_field form.plot class="genres" %}</p>
         <p><label class="genres">{{ form.ratings.label }}</label>{% render_field form.ratings class="genres" %}{{form.ratings.helptext}}</p>
 
+        <br>
+        <hr>
+        <h3>Исключите жанры:</h3>
         <table>
             <tr>
                 <td width="20%">{% render_field form.exclude_action class="genres" %}<label class="genres">{{ form.exclude_action.label }}</label></td>
@@ -111,9 +120,9 @@
             </tr>
         </table>
         <p></p>
-        <p>{% render_field form.games class="genres" %}<label class="genres">{{ form.games.label }}</label></p>
-        <p>{% render_field form.books class="genres" %}<label class="genres">{{ form.books.label }}</label></p>
 
+
+        <hr>
         <p>{% render_field form.russian class="genres" %}<label class="genres">{{ form.russian.label }}</label></p>
         <p>{% render_field form.keywords class="genres" %}<label class="genres">{{ form.keywords.label }}</label></p>
         <p>{% render_field form.exclude_keywords class="genres" %}<label class="genres">{{ form.exclude_keywords.label }}</label></p>

@@ -165,10 +165,49 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                 selection.append('вы выбрали следующую категорию: ' + ', '.join(selected_category))
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
 
+            # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
+            fantasy_book = ('/knigi-fentezi/', form.cleaned_data.get('fantasy_book'))
+            detective_book = ('/knigi-detektivy/', form.cleaned_data.get('detective_book'))
+            science_fiction_book = ('/knigi-fantastika/', form.cleaned_data.get('science_fiction_book'))
+            romance_book = ('/knigi-lubovnye-romany/', form.cleaned_data.get('romance_book'))
+            adventure_book = ('/knigi-priklucheniya/', form.cleaned_data.get('adventure_book'))
+            horror_book = ('/knigi-uzhasy-mistika/', form.cleaned_data.get('horror_book'))
+            manga_book = ('/komiksy-manga/', form.cleaned_data.get('manga_book'))
+            modern_prose_book = ('/knigi-sovremennaya-proza/', form.cleaned_data.get('modern_prose_book'))
+            classic_book = ('/klassicheskaya-literatura/', form.cleaned_data.get('classic_book'))
+            poetry_book = ('/sereznoe-chtenie/ctihi-poeziya/', form.cleaned_data.get('poetry_book'))
+            biography_book = ('/knigi-publicistika/biografii-memuary/', form.cleaned_data.get('biography_book'))
+            history_book = ('/istoriya/', form.cleaned_data.get('history_book'))
+            war_book = ('/knigi-sovremennaya-proza/knigi_o_voyne/', form.cleaned_data.get('war_book'))
+            business_book = ('/biznes-knigi/o-biznese-populyarno/', form.cleaned_data.get('business_book'))
+            study_book = ('/znaniya-navyki/uchebnaya-nauchnaya-literatura/', form.cleaned_data.get('study_book'))
+            esoteric_book = ('/knigi-ezoterika/', form.cleaned_data.get('esoteric_book'))
+            dictionary_book = ('/spravochniki-slovari/', form.cleaned_data.get('dictionary_book'))
+            languages_book = ('/znaniya-navyki/uchebnaya-nauchnaya-literatura/gumanitarnye-obschestvennye-nauki/izuchenie-yazykov/', form.cleaned_data.get('languages_book'))
+            art_book = ('/knigi-iskusstvo/', form.cleaned_data.get('art_book'))
+            maps_book = ('/spravochniki-slovari/putevoditeli/', form.cleaned_data.get('maps_book'))
+            psychology_book = ('/knigi-psihologiya/', form.cleaned_data.get('psychology_book'))
+            sport_book = ('/sport-zdorove-krasota/sport/', form.cleaned_data.get('sport_book'))
+            cooking_book = ('/knigi-dom-semya/kulinariya/', form.cleaned_data.get('cooking_book'))
+            kids_book = ('/detskie-knigi/', form.cleaned_data.get('kids_book'))
+            fairytales_book = ('/detskie-knigi/skazki/', form.cleaned_data.get('fairytales_book'))
+            student_book = ('/detskie-knigi/uchebnaya-literatura/', form.cleaned_data.get('student_book'))
+            school_book = ('/shkolnye-uchebniki/', form.cleaned_data.get('school_book'))
+
+            books = [fantasy_book, detective_book, science_fiction_book, romance_book, adventure_book, horror_book, manga_book,
+                               modern_prose_book, classic_book, poetry_book, biography_book, history_book, war_book, business_book, study_book,
+                               esoteric_book, dictionary_book, languages_book, psychology_book, maps_book, art_book, sport_book, cooking_book,
+                               kids_book, fairytales_book, student_book, school_book]
+
+            selected_books = [item[0] for item in books if item[1] == True]
+            if selected_books:
+                selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
+
+            # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
 
 
             return render(request, 'search/movies_results.html',
-                          {'temp': create_request(selected_category, selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
+                          {'temp': create_request(selected_books, selected_category, selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
