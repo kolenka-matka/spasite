@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from .create_request import create_request
+from .create_request import create_request, books_help, from_hren_to_genre
 from .forms import LoginForm, UserRegistrationForm, MoviesChoiceForm
 from dal import autocomplete
-from .lists import actors_list
+from .lists import actors_list, new_book_genres_list
 
 
 
@@ -141,15 +141,17 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             exclude_thriller = ('thriller', form.cleaned_data.get('exclude_thriller'))
             exclude_western = ('western', form.cleaned_data.get('exclude_western'))
 
-            exclude_genres = {exclude_adventure, exclude_animation, exclude_biography, exclude_comedy, exclude_crime, exclude_documentary,
-                              exclude_drama, exclude_family, exclude_action, fantasy, exclude_film_noir, exclude_history, exclude_horror, exclude_fantasy,
-                              exclude_musical, exclude_mystery, exclude_romance, exclude_sci_fi, exclude_sport, exclude_thriller, exclude_western}
+            exclude_genres = {exclude_adventure, exclude_animation, exclude_biography, exclude_comedy, exclude_crime,
+                              exclude_documentary,
+                              exclude_drama, exclude_family, exclude_action, fantasy, exclude_film_noir,
+                              exclude_history, exclude_horror, exclude_fantasy,
+                              exclude_musical, exclude_mystery, exclude_romance, exclude_sci_fi, exclude_sport,
+                              exclude_thriller, exclude_western}
             exclude_genres = {item[0].replace('_', '-') for item in exclude_genres if item[1] == True}
             if exclude_genres:
                 selection.append('вы исключили следующие жанры: ' + ', '.join(exclude_genres))
 
             plot = form.cleaned_data.get('plot')
-
 
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
             tv_series = ('tv_series', form.cleaned_data.get('tv_series'))
@@ -157,6 +159,10 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             games = ('games', form.cleaned_data.get('games'))
             books = ('books', form.cleaned_data.get('books'))
             podcasts = ('podcasts', form.cleaned_data.get('podcasts'))
+
+            res = ('teeesting things', form.cleaned_data.get('test'))
+            tests = [res]
+            selected_res = [item[0].replace('_', '-') for item in tests if item[1] == True]
 
             categories = [tv_series, movies, games, books, podcasts]
             selected_category = [item[0].replace('_', '-') for item in categories if item[1] == True]
@@ -183,7 +189,9 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             study_book = ('/znaniya-navyki/uchebnaya-nauchnaya-literatura/', form.cleaned_data.get('study_book'))
             esoteric_book = ('/knigi-ezoterika/', form.cleaned_data.get('esoteric_book'))
             dictionary_book = ('/spravochniki-slovari/', form.cleaned_data.get('dictionary_book'))
-            languages_book = ('/znaniya-navyki/uchebnaya-nauchnaya-literatura/gumanitarnye-obschestvennye-nauki/izuchenie-yazykov/', form.cleaned_data.get('languages_book'))
+            languages_book = (
+            '/znaniya-navyki/uchebnaya-nauchnaya-literatura/gumanitarnye-obschestvennye-nauki/izuchenie-yazykov/',
+            form.cleaned_data.get('languages_book'))
             art_book = ('/knigi-iskusstvo/', form.cleaned_data.get('art_book'))
             maps_book = ('/spravochniki-slovari/putevoditeli/', form.cleaned_data.get('maps_book'))
             psychology_book = ('/knigi-psihologiya/', form.cleaned_data.get('psychology_book'))
@@ -194,20 +202,29 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             student_book = ('/detskie-knigi/uchebnaya-literatura/', form.cleaned_data.get('student_book'))
             school_book = ('/shkolnye-uchebniki/', form.cleaned_data.get('school_book'))
 
-            books = [fantasy_book, detective_book, science_fiction_book, romance_book, adventure_book, horror_book, manga_book,
-                               modern_prose_book, classic_book, poetry_book, biography_book, history_book, war_book, business_book, study_book,
-                               esoteric_book, dictionary_book, languages_book, psychology_book, maps_book, art_book, sport_book, cooking_book,
-                               kids_book, fairytales_book, student_book, school_book]
 
-            selected_books = [item[0] for item in books if item[1] == True]
+
+            books = [fantasy_book, detective_book, science_fiction_book, romance_book, adventure_book, horror_book,
+                     manga_book,
+                     modern_prose_book, classic_book, poetry_book, biography_book, history_book, war_book,
+                     business_book,
+                     study_book, esoteric_book, dictionary_book, languages_book, psychology_book, maps_book, art_book,
+                     sport_book,
+                     cooking_book, kids_book, fairytales_book, student_book, school_book]
+
+            selected_books = [item[0].replace('_', '-') for item in books if item[1] == True]
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            # selected_books = [from_hren_to_genre(i) for i in selected_books]
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if selected_books:
                 selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
 
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
 
-
-            return render(request, 'search/movies_results.html',
-                          {'temp': create_request(selected_books, selected_category, selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
+            return render(request, 'search/books_results.html',
+                          {'temp': create_request(selected_books, selected_category, selected_genres, countries,
+                                                  exclude_genres, plot, ratings, actors), 'selection': selection,
+                           'books': books_help(selected_books)})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})

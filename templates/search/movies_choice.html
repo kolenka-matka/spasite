@@ -42,6 +42,7 @@
     <form method="post">
         <h3>Выберите категорию поиска:</h3>
         {% csrf_token %}
+
         {% render_field form.movies class="genres" %}<label class="genres">{{ form.movies.label }}</label>
         {% render_field form.tv_series class="genres" %}<label class="genres">{{ form.tv_series.label }}</label>
         {% render_field form.games class="genres" %}<label class="genres">{{ form.games.label }}</label>
@@ -120,9 +121,52 @@
             </tr>
         </table>
         <p></p>
-
-
         <hr>
+
+        <h3>Выберите жанры для книг:</h3>
+        <table>
+        <tr>
+            <td width="20%">{% render_field form.fantasy_book class="genres" %}<label class="genres">{{ form.fantasy_book.label }}</label></td>
+            <td width="20%">{% render_field form.detective_book class="genres" %}<label class="genres">{{ form.detective_book.label }}</label></td>
+            <td width="20%">{% render_field form.science_fiction_book class="genres" %}<label class="genres">{{ form.science_fiction_book.label }}</label></td>
+            <td width="20%">{% render_field form.romance_book class="genres" %}<label class="genres">{{ form.romance_book.label }}</label></td>
+            <td width="20%">{% render_field form.adventure_book class="genres" %}<label class="genres">{{ form.adventure_book.label }}</label></td>
+        </tr>
+
+        <tr>
+            <td width="20%">{% render_field form.horror_book class="genres" %}<label class="genres">{{ form.horror_book.label }}</label></td>
+            <td width="20%">{% render_field form.manga_book class="genres" %}<label class="genres">{{ form.manga_book.label }}</label></td>
+            <td width="20%">{% render_field form.modern_prose_book class="genres" %}<label class="genres">{{ form.modern_prose_book.label }}</label></td>
+            <td width="20%">{% render_field form.classic_book class="genres" %}<label class="genres">{{ form.classic_book.label }}</label></td>
+            <td width="20%">{% render_field form.poetry_book class="genres" %}<label class="genres">{{ form.poetry_book.label }}</label></td>
+        </tr>
+        <tr>
+            <td width="20%">{% render_field form.biography_book class="genres" %}<label class="genres">{{ form.biography_book.label }}</label></td>
+            <td width="20%">{% render_field form.history_book class="genres" %}<label class="genres">{{ form.history_book.label }}</label></td>
+            <td width="20%">{% render_field form.war_book class="genres" %}<label class="genres">{{ form.war_book.label }}</label></td>
+            <td width="20%">{% render_field form.business_book class="genres" %}<label class="genres">{{ form.business_book.label }}</label></td>
+            <td width="20%">{% render_field form.study_book class="genres" %}<label class="genres">{{ form.study_book.label }}</label></td>
+        </tr>
+            <tr>
+            <td width="20%">{% render_field form.esoteric_book class="genres" %}<label class="genres">{{ form.esoteric_book.label }}</label></td>
+            <td width="20%">{% render_field form.dictionary_book class="genres" %}<label class="genres">{{ form.dictionary_book.label }}</label></td>
+            <td width="20%">{% render_field form.languages_book class="genres" %}<label class="genres">{{ form.languages_book.label }}</label></td>
+            <td width="20%">{% render_field form.art_book class="genres" %}<label class="genres">{{ form.art_book.label }}</label></td>
+            <td width="20%">{% render_field form.maps_book class="genres" %}<label class="genres">{{ form.maps_book.label }}</label></td>
+        </tr>
+            <tr>
+            <td width="20%">{% render_field form.psychology_book class="genres" %}<label class="genres">{{ form.psychology_book.label }}</label></td>
+            <td width="20%">{% render_field form.sport_book class="genres" %}<label class="genres">{{ form.sport_book.label }}</label></td>
+            <td width="20%">{% render_field form.cooking_book class="genres" %}<label class="genres">{{ form.cooking_book.label }}</label></td>
+            <td width="20%">{% render_field form.kids_book class="genres" %}<label class="genres">{{ form.kids_book.label }}</label></td>
+            <td width="20%">{% render_field form.fairytales_book class="genres" %}<label class="genres">{{ form.fairytales_book.label }}</label></td>
+        </tr>
+            <tr>
+            <td width="20%">{% render_field form.student_book class="genres" %}<label class="genres">{{ form.student_book.label }}</label></td>
+            <td width="20%">{% render_field form.school_book class="genres" %}<label class="genres">{{ form.school_book.label }}</label></td>
+        </tr>
+        </table>
+
         <p>{% render_field form.russian class="genres" %}<label class="genres">{{ form.russian.label }}</label></p>
         <p>{% render_field form.keywords class="genres" %}<label class="genres">{{ form.keywords.label }}</label></p>
         <p>{% render_field form.exclude_keywords class="genres" %}<label class="genres">{{ form.exclude_keywords.label }}</label></p>

@@ -111,6 +111,8 @@ class MoviesChoiceForm(forms.Form):
     books = forms.BooleanField(label='книги', required=False)
     podcasts = forms.BooleanField(label='подкасты', required=False)
 
+    # test = forms.BooleanField(label='ПОМОГИТЕ', required=False)
+
 
     fantasy_book = forms.BooleanField(label='Фэнтези', required=False)
     detective_book = forms.BooleanField(label='Детективы', required=False)
@@ -119,7 +121,6 @@ class MoviesChoiceForm(forms.Form):
     adventure_book = forms.BooleanField(label='Приключения', required=False)
     horror_book = forms.BooleanField(label='Ужасы/мистика', required=False)
     manga_book = forms.BooleanField(label='Комиксы/манга', required=False)
-
     modern_prose_book = forms.BooleanField(label='Современная проза', required=False)
     classic_book = forms.BooleanField(label='Классическая литература', required=False)
     poetry_book = forms.BooleanField(label='Поэзия', required=False)
@@ -130,7 +131,6 @@ class MoviesChoiceForm(forms.Form):
     study_book = forms.BooleanField(label='Учебная и научная литература', required=False)
     esoteric_book = forms.BooleanField(label='Эзотерика', required=False)
     dictionary_book = forms.BooleanField(label='Словари', required=False)
-
     languages_book = forms.BooleanField(label='Изучение языков', required=False)
     art_book = forms.BooleanField(label='Культура и искусство', required=False)
     maps_book = forms.BooleanField(label='Путеводители', required=False)

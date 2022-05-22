@@ -1,6 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
+from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
+
+def from_hren_to_genre(name):
+    genre = [i[1] for i in new_book_genres_list if i[0] == name][0]
+    return genre
 
 
 def create_request(selected_books=None, selected_category=None, selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
@@ -77,6 +82,40 @@ def create_request(selected_books=None, selected_category=None, selected_genres=
         dic = {'name': name, 'year': year, 'genre': genre, "summary": summary}
         output.append(dic)
     return output
+
+def books_help(selected_books=None):
+    url = "https://www.litres.ru"
+
+    text_ = requests.get(url).text
+
+    url = url + selected_books[0] + "elektronnie-knigi/"
+
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, "html.parser")
+    names = []
+    authors = []
+    hrefs = []
+
+    for link in soup.findAll(class_='art-item__name__href'):
+        href = link.get('href')
+        name = link.get('title')
+        names.append(name)
+        hrefs.append(href)
+
+    for link in soup.findAll(class_='art-item__author'):
+        auth = link.text
+        authors.append(auth)
+
+    result = []
+    genre = [i[1] for i in new_book_genres_list if i[0] == selected_books[0]][0]
+    for i in range(len(names)):
+        dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre}
+        # print(dic)
+        result.append(dic)
+
+    return result
+
+
 
 def books_create_request(russian=None, keywords=None, exclude_keywords=None, author=None, date_from=None, date_to=None):
     url = "https://www.google.ru/search?hl=ru&tbo=p&tbm=bks&q="
