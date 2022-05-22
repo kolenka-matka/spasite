@@ -150,8 +150,24 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
 
             plot = form.cleaned_data.get('plot')
 
+            # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
+            tv_series = ('tv_series', form.cleaned_data.get('tv_series'))
+            movies = ('movies', form.cleaned_data.get('movies'))
+            games = ('games', form.cleaned_data.get('games'))
+            books = ('books', form.cleaned_data.get('books'))
+            podcasts = ('podcasts', form.cleaned_data.get('podcasts'))
+
+            categories = [tv_series, movies, games, books, podcasts]
+            selected_category = [item[0].replace('_', '-') for item in categories if item[1] == True]
+
+            if selected_category:
+                selection.append('вы выбрали следующую категорию: ' + ', '.join(selected_category))
+            # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
+
+
+
             return render(request, 'search/movies_results.html',
-                          {'temp': create_request(selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
+                          {'temp': create_request(selected_category, selected_genres, countries, exclude_genres, plot, ratings, actors), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})

@@ -3,8 +3,17 @@ from bs4 import BeautifulSoup
 from googletrans import Translator
 
 
-def create_request(selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
+def create_request(selected_category=None, selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
+    print(selected_category)
+
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    """
+    if selected_category == 'movies' or selected_category == 'tv_series':
+        url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
+    """
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
         if exclude_genres:
