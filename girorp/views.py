@@ -150,6 +150,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
 
             plot = form.cleaned_data.get('plot')
 
+
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
             tv_series = ('tv_series', form.cleaned_data.get('tv_series'))
             movies = ('movies', form.cleaned_data.get('movies'))

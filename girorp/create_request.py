@@ -9,6 +9,7 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     """
+    
     if selected_category == 'movies' or selected_category == 'tv_series':
         url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     """

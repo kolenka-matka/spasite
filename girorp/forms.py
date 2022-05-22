@@ -104,6 +104,7 @@ class MoviesChoiceForm(forms.Form):
     date_from = forms.DateField(label='c', required=False)
     date_to = forms.DateField(label='до', required=False)
 
+
     tv_series = forms.BooleanField(label='сериалы', required=False)
     movies = forms.BooleanField(label='фильмы', required=False)
     games = forms.BooleanField(label='игры', required=False)
