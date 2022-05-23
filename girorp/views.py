@@ -172,6 +172,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
 
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
+            '''
             fantasy_book = ('/knigi-fentezi/', form.cleaned_data.get('fantasy_book'))
             detective_book = ('/knigi-detektivy/', form.cleaned_data.get('detective_book'))
             science_fiction_book = ('/knigi-fantastika/', form.cleaned_data.get('science_fiction_book'))
@@ -201,9 +202,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             fairytales_book = ('/detskie-knigi/skazki/', form.cleaned_data.get('fairytales_book'))
             student_book = ('/detskie-knigi/uchebnaya-literatura/', form.cleaned_data.get('student_book'))
             school_book = ('/shkolnye-uchebniki/', form.cleaned_data.get('school_book'))
-
-
-
+            
             books = [fantasy_book, detective_book, science_fiction_book, romance_book, adventure_book, horror_book,
                      manga_book,
                      modern_prose_book, classic_book, poetry_book, biography_book, history_book, war_book,
@@ -220,11 +219,10 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                 selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
 
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
-
-            return render(request, 'search/books_results.html',
-                          {'temp': create_request(selected_books, selected_category, selected_genres, countries,
-                                                  exclude_genres, plot, ratings, actors), 'selection': selection,
-                           'books': books_help(selected_books)})
+            '''
+            return render(request, 'search/movies_results.html',
+                          {'temp': create_request(None, selected_category, selected_genres, countries,
+                                                  exclude_genres, plot, ratings, actors), 'selection': selection})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})

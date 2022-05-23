@@ -2,13 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
 from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
+import re
 
 def from_hren_to_genre(name):
     genre = [i[1] for i in new_book_genres_list if i[0] == name][0]
     return genre
 
 
-def create_request(selected_books=None, selected_category=None, selected_genres=None, countries=None, exclude_genres=set(), plot=None, ratings=None, actors=None):
+def create_request(selected_books=None, selected_category=None, selected_genres=None, countries=None,
+                   exclude_genres=set(), plot=None, ratings=None, actors=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
     print(selected_category)
 
@@ -50,21 +52,19 @@ def create_request(selected_books=None, selected_category=None, selected_genres=
         ratings = ','.join((item + 'US%3A' for item in ratings))
         url = url + '&certificates' + ratings
 
-
-    # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!
     if selected_books:
         book_genres = ','.join(selected_books)
         url = url + book_genres + "elektronnie-knigi/"
-    # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!
 
     text_ = requests.get(url).text
-    print(url)
+    # print(url)
 
     soup = BeautifulSoup(text_, 'lxml')
-    found = soup.find_all("div", class_="lister-item-content")
+    found = soup.find_all("div", class_="lister-item mode-advanced")
     output = list()
 
-    for item in found:
+    for i in found:
+        item = i.find('div', class_='lister-item-content')
         name = item.find("a").text
         link = "https://www.imdb.com" + item.find('h3', class_="lister-item-header").find('a').get('href')
         year = item.find('span', class_="lister-item-year text-muted unbold").text
@@ -78,18 +78,21 @@ def create_request(selected_books=None, selected_category=None, selected_genres=
 
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
+        # pic = i.find('div', class_="lister-item-image float-left").find('img', class_='loadlate').get('src')
 
-        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary}
+        link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
+        # pic = BeautifulSoup(requests.get(link).text, 'lxml').find("img", class_="ipc-image").get('src')
+        pic = re.search(r'class="ipc-image" loading="eager" src=".*?"', requests.get(link).text).group(0)
+        pic = pic[pic.find('src') + 5:-1:]
+        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': pic, 'link': link}
         output.append(dic)
     return output
 
+
 def books_help(selected_books=None):
     url = "https://www.litres.ru"
-
     text_ = requests.get(url).text
-
     url = url + selected_books[0] + "elektronnie-knigi/"
-
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     names = []

@@ -49,6 +49,9 @@
         <p> год: <td>{{ i.year }}</td> </p>
         <p> жанры: <td>{{ i.genre }}</td> </p>
         <p> описание: <td>{{ i.summary }}</td> </p>
+        <p> картинка: <td>{{ i.pic }}</td> </p>
+        <img height="98" src={{ i.pic }} width="67">
+        <p> ссылка: <td>{{ i.link }}</td> </p>
         <br>
     </tr>
     {% endfor %}
