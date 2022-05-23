@@ -51,7 +51,7 @@
         <p> описание: <td>{{ i.summary }}</td> </p>
         <p> картинка: <td>{{ i.pic }}</td> </p>
         <img height="98" src={{ i.pic }} width="67">
-        <p> ссылка: <td>{{ i.link }}</td> </p>
+        <p> ссылка: <td> <a href= {{ i.link }}></a></td> </p>
         <br>
     </tr>
     {% endfor %}

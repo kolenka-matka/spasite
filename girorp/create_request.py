@@ -4,12 +4,13 @@ from googletrans import Translator
 from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
 import re
 
+
 def from_hren_to_genre(name):
     genre = [i[1] for i in new_book_genres_list if i[0] == name][0]
     return genre
 
 
-def create_request(selected_books=None, selected_category=None, selected_genres=None, countries=None,
+def create_request(selected_category=None, selected_genres=None, countries=None,
                    exclude_genres=set(), plot=None, ratings=None, actors=None):
     print('exclude: ', exclude_genres, ', include:', selected_genres)
     print(selected_category)
@@ -51,10 +52,11 @@ def create_request(selected_books=None, selected_category=None, selected_genres=
     if ratings:
         ratings = ','.join((item + 'US%3A' for item in ratings))
         url = url + '&certificates' + ratings
-
+    '''
     if selected_books:
         book_genres = ','.join(selected_books)
         url = url + book_genres + "elektronnie-knigi/"
+        '''
 
     text_ = requests.get(url).text
     # print(url)
@@ -119,23 +121,3 @@ def books_help(selected_books=None):
     return result
 
 
-
-def books_create_request(russian=None, keywords=None, exclude_keywords=None, author=None, date_from=None, date_to=None):
-    url = "https://www.google.ru/search?hl=ru&tbo=p&tbm=bks&q="
-    if russian:
-        url='https://www.google.ru/search?lr=lang_ru&hl=ru&tbo=p&tbm=bks&q='
-    tags = list()
-    if keywords:
-        tags.extend(keywords.lower().split())
-    if exclude_keywords:
-        tags.extend(('-' + item for item in keywords.lower().split()))
-    if author:
-        tags.extend(('inauthor:' + item.lower() for item in author.lower().split()))
-    tags = '+'.join(tags)
-
-
-    url += tags
-    text_ = requests.get(url).text
-    print(url)
-
-    soup = BeautifulSoup(text_, 'lxml')

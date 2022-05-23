@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>вы зарегистрировались! ура</title>
     <link rel="stylesheet" href="{% static 'css/styles.css'%}" type="text/css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
 </header>
 
 <body>
-    <h1>Welcome {{ new_user.first_name }}!</h1>
-    <p>Your account has been successfully created. Now you can <a href="{% url "login" %}">log in</a>.</p>
+    <h1>добро пожаловать, {{ new_user.first_name }}!</h1>
+    <p>вы успешно создали новый аккаунт. теперь можно <a href="{% url "login" %}">войти в него</a>.</p>
 </body>
 </html>

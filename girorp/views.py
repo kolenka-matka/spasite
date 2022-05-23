@@ -221,7 +221,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
             '''
             return render(request, 'search/movies_results.html',
-                          {'temp': create_request(None, selected_category, selected_genres, countries,
+                          {'temp': create_request(selected_category, selected_genres, countries,
                                                   exclude_genres, plot, ratings, actors), 'selection': selection})
     else:
         form = MoviesChoiceForm()

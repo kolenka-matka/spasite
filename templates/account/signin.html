@@ -29,10 +29,14 @@
 <body id="login">
     <div class="login-form">   
             <form  class="box_signin" action="." method="post">
-                <h1 class="login-form">Create an account</h1>
-                <p class="center_things">Пожалуйста, заполните форму ниже:</p>
-                {{ user_form.as_p }}
+                <h1 class="login-form">создать аккаунт</h1>
+                <p class="center_things">пожалуйста, заполните форму ниже:</p>
                 {% csrf_token %}
+                {{ user_form.username }} <label>логин</label>
+                {{ user_form.first_name }} <label>ваше имя</label>
+                {{ user_form.email }} <label>электронная почта</label>
+                {{ user_form.password }} <label>пароль</label>
+                {{ user_form.password2 }} <label>повторите пароль</label>
                 <p><input class="btn_login" type="submit" value="создать аккаунт"></p>
             </form>
     </div>

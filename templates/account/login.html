@@ -29,19 +29,20 @@
 <body id="login">
         <div class="login-form">
             <form class="box" action="{% url 'login' %}" method="post">
-                <h1 class="login-form">Log In</h1>
+                <h1 class="login-form">войти</h1>
 
                 {% if form.errors %}
                     <p>
-                        Your username and password didn't match.
-                        Please try again.
+                        кажется, вы неправильно ввели логин или пароль.
+                        попробуйте еще раз!
                     </p>
                 {% else %}
-                    <p>Пожалуйста, заполните форму ниже, чтобы войти в аккаунт:</p>
+                    <p>пожалуйста, заполните форму ниже, чтобы войти в аккаунт:</p>
                 {% endif %}
 
 
-                {{ form.as_p }}
+                {{ form.username }} <label>логин</label>
+                {{ form.password }} <label>пароль</label>
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
                 <p><input class="btn_login" type="submit" value="войти"></p>

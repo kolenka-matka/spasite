@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import NonOrdinaryUser
 from django.contrib.auth.models import User
 from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
-import cchardet
+# import cchardet
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -36,7 +36,6 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
-
 
 
 class MoviesChoiceForm(forms.Form):
