@@ -51,7 +51,21 @@
         </p>
     {% endfor %}
     </tr> -->
+<div id="wrapper" style="margin: 10px;">
+    {{ games }}
+    {% for i in books %}
+    <tr>
+        <td class="result_box">
+            <p><b>Название книги: <td class="film-name">{{ i.name }}</td></b></p>
+            <p> Автор: <td>{{ i.author }}</td> </p>
+            <p> Жанры: <td>{{ i.genre }}</td> </p>
+    <!--        <img src={{ i.image }} alt="">-->
+        </td>
+        <br>
+    </tr>
+    {% endfor %}
 
+</div>
     {% for i in temp %}
         <div class="result_box">
             <img align="middle" height="300" src={{ i.pic }} width="200">
@@ -74,6 +88,7 @@
 
             <!-- <p> ссылка: <a href= {{ i.link }}></a></p> -->
         </div>
+
         <br>
     {% endfor %}
 </div>

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
-from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
+from .lists import new_book_genres_list
 import re
 
 
@@ -12,20 +12,8 @@ def from_hren_to_genre(name):
 
 def create_request(selected_category=None, selected_genres=None, countries=None,
                    exclude_genres=set(), plot=None, ratings=None, actors=None):
-    print('exclude: ', exclude_genres, ', include:', selected_genres)
-    print(selected_category)
-
-    # !!!!!!!!!!!!! -- вот отсюда начинается код из-за который не работает -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    """
-    url = ""
-    
-    if selected_category == 'movies' or selected_category == 'tv_series':
-        url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
-    elif selected_category == 'book':
-        url = "https://www.litres.ru"
-
-    """
-    # !!!!!!!!!!!!!!!!!!-- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # print('exclude: ', exclude_genres, ', include:', selected_genres)
+    # print(selected_category)
 
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
@@ -80,13 +68,11 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
 
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
-        # pic = i.find('div', class_="lister-item-image float-left").find('img', class_='loadlate').get('src')
 
-        link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
-        # pic = BeautifulSoup(requests.get(link).text, 'lxml').find("img", class_="ipc-image").get('src')
+        '''link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
         pic = re.search(r'class="ipc-image" loading="eager" src=".*?"', requests.get(link).text).group(0)
-        pic = pic[pic.find('src') + 5:-1:]
-        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': pic, 'link': link}
+        pic = pic[pic.find('src') + 5:-1:]'''
+        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': 'pic', 'link': link}
         output.append(dic)
     return output
 
@@ -94,7 +80,6 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
 def books_help(selected_books=None):
     if selected_books:
         url = "https://www.litres.ru"
-        text_ = requests.get(url).text
         url = url + selected_books[0] + "elektronnie-knigi/"
         page = requests.get(url)
         soup = BeautifulSoup(page.text, "html.parser")
@@ -129,5 +114,16 @@ def books_help(selected_books=None):
     return []
 
 
-def choose_games(games_selected_genres=None, exclude_games_genres=None):
-    pass
+def choose_games(selected_genres=None, exclude_genres=None):
+    url = "https://store.steampowered.com/search/"
+    if selected_genres:
+        if exclude_genres:
+            selected_genres = [item for item in selected_genres if item not in exclude_genres]
+        selected_genres = '%2C'.join(selected_genres)
+        url = url + "?tags=" + selected_genres
+    if exclude_genres:
+        url = url + '&untags=' + '%2C'.join(exclude_genres)
+    url += '&category1=998'
+    return url
+
+print(choose_games(['122', '9'], ['19780']))

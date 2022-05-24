@@ -444,9 +444,10 @@ tags_ = ['games_' + item.text.lower().replace(' ', '_').replace('-', '_').replac
 # print(tags)
 # print(tags_)
 
-games_tag_list = [(tags[i][0], tags_[i]) for i in range(15, 426)]
-# print(games_tag_list)
+games_tag_list = [(tags_[i], tags[i][0]) for i in range(15, 426)]
+print(games_tag_list)
+print([item[::-1] for item in tags[15::]])
 # for i in range(15):
 #     print(f"exclude_{tags_[i]} = ('{tags[i][1]}', form.cleaned_data.get('exclude_{tags_[i]}'))")
-print(*(tags_[i] for i in range(15)), sep=', ')
-print(*('exclude_' + tags_[i] for i in range(15)), sep=', ')
+# print(*(tags_[i] for i in range(15)), sep=', ')
+# print(*('exclude_' + tags_[i] for i in range(15)), sep=', ')
