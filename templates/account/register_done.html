@@ -12,22 +12,23 @@
 </head>
 
 
-<header class="header">
+<header class="header_dark">
     <div class="container">
         <div class="header_inner">
-            <div class="header_logo"><a class="nav_link" href="{% url "index" %}">Monsterrat</a></div>
-
+            <div class="header_logo"><a class="logo_link" href="{% url "index" %}">Monsterrat</a></div>
             <nav class="nav">
                 <a class="nav_link" href="{% url "movies" %}">поиск</a>
                 <a class="nav_link" href="{% url 'dashboard' %}">аккаунт</a>
-                
+
             </nav>
         </div>
     </div>
 </header>
 
 <body>
-    <h1>добро пожаловать, {{ new_user.first_name }}!</h1>
-    <p>вы успешно создали новый аккаунт. теперь можно <a href="{% url "login" %}">войти в него</a>.</p>
+    <div class="for_text">
+        <h1 style="margin: 20px">Добро пожаловать, {{ new_user.first_name }}!</h1>
+        <p style="margin: 20px">Вы успешно создали новый аккаунт. Теперь можно <a href="{% url "login" %}">войти в него</a>.</p>
+    </div>
 </body>
 </html>
