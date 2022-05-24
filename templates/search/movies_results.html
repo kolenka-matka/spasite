@@ -76,6 +76,8 @@
         <div class="result_box">
             {% if i.type == "movie" %}
                 <img align="middle" height="300" src={{ i.pic }} width="200">
+            {% elif i.type == "podcast" %}
+                <img align="middle" height="300" src={{ i.pic }} width="200">
             {% elif i.type == "book" %}
                 <img align="middle" src={{ i.image }} width="200">
             {% else %}
@@ -86,6 +88,13 @@
             <div class="result_info">
                 {% if i.type == "movie" %}
                     <p style="font-weight:bold">название фильма: {{ i.name }}</p>
+                    <p> год: {{ i.year }}</p>
+                    <p> жанры: {{ i.genre }}</p>
+                    <p> описание: {{ i.summary }}</p>
+                    <!-- <p> картинка: <td>{{ i.pic }}</td> </p> -->
+                    <br>
+                {% elif i.type == "podcast" %}
+                    <p style="font-weight:bold">название подкаста: {{ i.name }}</p>
                     <p> год: {{ i.year }}</p>
                     <p> жанры: {{ i.genre }}</p>
                     <p> описание: {{ i.summary }}</p>

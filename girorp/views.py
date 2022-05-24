@@ -125,7 +125,7 @@ def choose_movies(request):
 
                 selected_genres = [item[0].replace('_', '-') for item in genres if item[1] == True]
                 if selected_genres:
-                    selection.append('вы выбрали следующие жанры для фильмов: ' + ', '.join(selected_genres))
+                    selection.append('вы выбрали следующие жанры для фильмов, сериалов, подкастов: ' + ', '.join(selected_genres))
                 countries = form.cleaned_data.get('country')
                 if countries:
                     selection.append('вы выбрали следующие страны-производители для фильмов: ' + ', '.join(countries))
@@ -166,7 +166,7 @@ def choose_movies(request):
                                   exclude_thriller, exclude_western}
                 exclude_genres = {item[0].replace('_', '-') for item in exclude_genres if item[1] == True}
                 if exclude_genres:
-                    selection.append('для фильмов вы исключили следующие жанры: ' + ', '.join(exclude_genres))
+                    selection.append('для фильмов, сериалов, подкастов вы исключили следующие жанры: ' + ', '.join(exclude_genres))
 
                 plot = form.cleaned_data.get('plot')
                 result.append(create_request(selected_category, selected_genres, countries,
