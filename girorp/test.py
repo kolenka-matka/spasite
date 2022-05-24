@@ -444,10 +444,26 @@ tags_ = ['games_' + item.text.lower().replace(' ', '_').replace('-', '_').replac
 # print(tags)
 # print(tags_)
 
-games_tag_list = [(tags_[i], tags[i][0]) for i in range(15, 426)]
-print(games_tag_list)
-print([item[::-1] for item in tags[15::]])
+# games_tag_list = [(tags_[i], tags[i][0]) for i in range(15, 426)]
+# print(games_tag_list)
+# print([item[::-1] for item in tags[15::]])
 # for i in range(15):
 #     print(f"exclude_{tags_[i]} = ('{tags[i][1]}', form.cleaned_data.get('exclude_{tags_[i]}'))")
 # print(*(tags_[i] for i in range(15)), sep=', ')
 # print(*('exclude_' + tags_[i] for i in range(15)), sep=', ')
+
+players = [item.strip() for item in ''' Для одного игрока
+ Для нескольких игроков
+ Против игроков
+ Против игроков (по сети)
+ Против игроков (LAN)
+ Против игроков (общий экран)
+ Кооперативная игра
+ Кооператив (по сети)
+ Кооператив (LAN)
+ Кооператив (общий экран)
+ Общий экран
+ Кроссплатформенная игра'''.split('\n')]
+a = '2%2C1%2C49%2C36%2C47%2C37%2C9%2C38%2C48%2C39%2C24%2C27'.split('%2C')
+players = [(a[i], players[i]) for i in range(len(a))]
+print(players)

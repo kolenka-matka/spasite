@@ -108,16 +108,16 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             selection = list()
             selected_genres = [item[0].replace('_', '-') for item in genres if item[1] == True]
             if selected_genres:
-                selection.append('вы выбрали следующие жанры: ' + ', '.join(selected_genres))
+                selection.append('вы выбрали следующие жанры для фильмов: ' + ', '.join(selected_genres))
             countries = form.cleaned_data.get('country')
             if countries:
-                selection.append('вы выбрали следующие страны: ' + ', '.join(countries))
+                selection.append('вы выбрали следующие страны-производители для фильмов: ' + ', '.join(countries))
 
             actors = form.cleaned_data.get('actors')
 
             ratings = form.cleaned_data.get('ratings')
             if ratings:
-                selection.append('вы выбрали рейтинги ' + ', '.join(ratings))
+                selection.append('в категории "фильмы" вы выбрали рейтинги ' + ', '.join(ratings))
 
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ИСКЛЮЧИТЬ ЖАНРЫ !!!!!!!!!!!!!
             exclude_action = ('action', form.cleaned_data.get('exclude_action'))
@@ -149,7 +149,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                               exclude_thriller, exclude_western}
             exclude_genres = {item[0].replace('_', '-') for item in exclude_genres if item[1] == True}
             if exclude_genres:
-                selection.append('вы исключили следующие жанры: ' + ', '.join(exclude_genres))
+                selection.append('для фильмов вы исключили следующие жанры: ' + ', '.join(exclude_genres))
 
             plot = form.cleaned_data.get('plot')
 
@@ -259,11 +259,13 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             if exclude_games_genres:
                 selection.append('вы исключили следующие жанры для игр: ' + ', '.join(exclude_games_genres))
 
+            games_players = form.cleaned_data.get('games_players')
+
 
             return render(request, 'search/movies_results.html',
                           {'temp': create_request(selected_category, selected_genres, countries,
                                                   exclude_genres, plot, ratings, actors), 'selection': selection, 'books': books_help(selected_books),
-                           'games': choose_games(games_selected_genres, exclude_games_genres)})
+                           'games': choose_games(games_selected_genres, exclude_games_genres,  games_players)})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})

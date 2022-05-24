@@ -177,3 +177,9 @@ class MoviesChoiceForm(forms.Form):
     exclude_games_multiplayer = forms.BooleanField(label='исключить: для нескольких игроков', required=False)
     exclude_games_story_rich = forms.BooleanField(label='исключить: глубокий сюжет', required=False)
     exclude_games_other = forms.MultipleChoiceField(choices=games_tag_list, required=False, label='исключить другие жанры:')
+
+    games_players = forms.MultipleChoiceField(choices=[
+        ('2', 'Для одного игрока'), ('1', 'Для нескольких игроков'), ('49', 'Против игроков'),
+        ('36', 'Против игроков (по сети)'), ('47', 'Против игроков (LAN)'), ('37', 'Против игроков (общий экран)'),
+        ('9', 'Кооперативная игра'), ('38', 'Кооператив (по сети)'), ('48', 'Кооператив (LAN)'),
+        ('39', 'Кооператив (общий экран)'), ('24', 'Общий экран'), ('27', 'Кроссплатформенная игра')], required=False, label='количество игроков')

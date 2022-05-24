@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
-from .lists import new_book_genres_list
+# from .lists import new_book_genres_list
 import re
 
 
@@ -12,8 +12,6 @@ def from_hren_to_genre(name):
 
 def create_request(selected_category=None, selected_genres=None, countries=None,
                    exclude_genres=set(), plot=None, ratings=None, actors=None):
-    # print('exclude: ', exclude_genres, ', include:', selected_genres)
-    # print(selected_category)
 
     url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
     if selected_genres:
@@ -40,11 +38,6 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
     if ratings:
         ratings = ','.join((item + 'US%3A' for item in ratings))
         url = url + '&certificates' + ratings
-    '''
-    if selected_books:
-        book_genres = ','.join(selected_books)
-        url = url + book_genres + "elektronnie-knigi/"
-        '''
 
     text_ = requests.get(url).text
     # print(url)
@@ -114,7 +107,7 @@ def books_help(selected_books=None):
     return []
 
 
-def choose_games(selected_genres=None, exclude_genres=None):
+def choose_games(selected_genres=None, exclude_genres=None, players=None):
     url = "https://store.steampowered.com/search/"
     if selected_genres:
         if exclude_genres:
@@ -124,6 +117,26 @@ def choose_games(selected_genres=None, exclude_genres=None):
     if exclude_genres:
         url = url + '&untags=' + '%2C'.join(exclude_genres)
     url += '&category1=998'
-    return url
+    if players:
+        url = url + '&category3=' + '%2C'.join(players)
 
-print(choose_games(['122', '9'], ['19780']))
+    text = requests.get(url).text
+    soup = BeautifulSoup(text, 'lxml')
+    found = soup.find("div", {'id':'search_result_container'}).find_all('a')
+
+    output = list()
+    for item in found:
+        dic = dict()
+        title = item.find('span', class_="title")
+        if title:
+            dic['title'] = title.text
+            link = item.get('href')
+            dic['link'] = link
+            reviews = item.find('div', class_='col search_reviewscore responsive_secondrow').find('span').get('data-tooltip-html')
+            reviews = re.search(r'\d{1,2}%', reviews).group(0)
+            dic['reviews'] = reviews  # процент положительных отзывов
+            dic['pic'] = item.find('div', class_="col search_capsule").find('img').get('src')
+            output.append(dic)
+    return output
+
+print(choose_games(['1742']), sep='\n')

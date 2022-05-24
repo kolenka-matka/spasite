@@ -52,7 +52,19 @@
     {% endfor %}
     </tr> -->
 <div id="wrapper" style="margin: 10px;">
-    {{ games }}
+    {% for i in games %}
+    <tr>
+        <td class="result_box">
+            <p><b>Название игры: <td class="film-name">{{ i.title }}</td></b></p>
+            <p> ссылка: <td>{{ i.link }}</td> </p>
+            <p> положительных отзывов: <td>{{ i.reviews }}</td> </p>
+             <img src={{ i.pic }} alt={{i.title}}>
+        </td>
+        <br>
+    </tr>
+    {% endfor %}
+
+
     {% for i in books %}
     <tr>
         <td class="result_box">
