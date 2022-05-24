@@ -129,3 +129,5 @@ def books_help(selected_books=None):
     return []
 
 
+def choose_games(games_selected_genres=None, exclude_games_genres=None):
+    pass

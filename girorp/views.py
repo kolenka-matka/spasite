@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from .create_request import create_request, books_help, from_hren_to_genre
+from .create_request import create_request, books_help, choose_games
 from .forms import LoginForm, UserRegistrationForm, MoviesChoiceForm
 from dal import autocomplete
 from .lists import actors_list, new_book_genres_list
@@ -212,17 +212,56 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                      cooking_book, kids_book, fairytales_book, student_book, school_book]
 
             selected_books = [item[0].replace('_', '-') for item in books if item[1] == True]
-            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            # selected_books = [from_hren_to_genre(i) for i in selected_books]
-            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if selected_books:
                 selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
 
-            # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
-            # '''
+            # ------------------------ ИГРЫ --------------------------------
+            games_indie = ('492', form.cleaned_data.get('games_indie'))
+            games_action = ('19', form.cleaned_data.get('games_action'))
+            games_adventure = ('21', form.cleaned_data.get('games_adventure'))
+            games_casual = ('597', form.cleaned_data.get('games_casual'))
+            games_simulation = ('599', form.cleaned_data.get('games_simulation'))
+            games_rpg = ('122', form.cleaned_data.get('games_rpg'))
+            games_strategy = ('9', form.cleaned_data.get('games_strategy'))
+            games_singleplayer = ('4182', form.cleaned_data.get('games_singleplayer'))
+            games_early_access = ('493', form.cleaned_data.get('games_early_access'))
+            games_free_to_play = ('113', form.cleaned_data.get('games_free_to_play'))
+            games_twod = ('3871', form.cleaned_data.get('games_twod'))
+            games_atmospheric = ('4166', form.cleaned_data.get('games_atmospheric'))
+            games_threed = ('4191', form.cleaned_data.get('games_threed'))
+            games_massively_multiplayer = ('128', form.cleaned_data.get('games_massively_multiplayer'))
+            games_multiplayer = ('3859', form.cleaned_data.get('games_multiplayer'))
+            games_genres = [games_indie, games_action, games_adventure, games_casual, games_simulation, games_rpg, games_strategy, games_singleplayer, games_early_access, games_free_to_play, games_twod, games_atmospheric, games_threed, games_massively_multiplayer, games_multiplayer]
+            games_selected_genres = [item[0].replace('_', '-') for item in games_genres if item[1] == True]
+            if games_selected_genres:
+                selection.append('вы выбрали следующие жанры для игры: ' + ', '.join(games_selected_genres))
+
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ИСКЛЮЧИТЬ ЖАНРЫ !!!!!!!!!!!!!
+            exclude_games_indie = ('492', form.cleaned_data.get('exclude_games_indie'))
+            exclude_games_action = ('19', form.cleaned_data.get('exclude_games_action'))
+            exclude_games_adventure = ('21', form.cleaned_data.get('exclude_games_adventure'))
+            exclude_games_casual = ('597', form.cleaned_data.get('exclude_games_casual'))
+            exclude_games_simulation = ('599', form.cleaned_data.get('exclude_games_simulation'))
+            exclude_games_rpg = ('122', form.cleaned_data.get('exclude_games_rpg'))
+            exclude_games_strategy = ('9', form.cleaned_data.get('exclude_games_strategy'))
+            exclude_games_singleplayer = ('4182', form.cleaned_data.get('exclude_games_singleplayer'))
+            exclude_games_early_access = ('493', form.cleaned_data.get('exclude_games_early_access'))
+            exclude_games_free_to_play = ('113', form.cleaned_data.get('exclude_games_free_to_play'))
+            exclude_games_twod = ('3871', form.cleaned_data.get('exclude_games_twod'))
+            exclude_games_atmospheric = ('4166', form.cleaned_data.get('exclude_games_atmospheric'))
+            exclude_games_threed = ('4191', form.cleaned_data.get('exclude_games_threed'))
+            exclude_games_massively_multiplayer = ('128', form.cleaned_data.get('exclude_games_massively_multiplayer'))
+            exclude_games_multiplayer = ('3859', form.cleaned_data.get('exclude_games_multiplayer'))
+            exclude_games_genres = [exclude_games_indie, exclude_games_action, exclude_games_adventure, exclude_games_casual, exclude_games_simulation, exclude_games_rpg, exclude_games_strategy, exclude_games_singleplayer, exclude_games_early_access, exclude_games_free_to_play, exclude_games_twod, exclude_games_atmospheric, exclude_games_threed, exclude_games_massively_multiplayer, exclude_games_multiplayer]
+            exclude_games_genres = [item[0] for item in exclude_games_genres if item[1] == True]
+            if exclude_games_genres:
+                selection.append('вы выбрали следующие жанры для игры: ' + ', '.join(exclude_games_genres))
+
+
             return render(request, 'search/movies_results.html',
                           {'temp': create_request(selected_category, selected_genres, countries,
-                                                  exclude_genres, plot, ratings, actors), 'selection': selection, 'books': books_help(selected_books)})
+                                                  exclude_genres, plot, ratings, actors), 'selection': selection, 'books': books_help(selected_books),
+                           'games': choose_games(games_selected_genres, exclude_games_genres)})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})

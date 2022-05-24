@@ -50,7 +50,7 @@
         {% render_field form.podcasts class="genres" %}<label class="genres">{{ form.podcasts.label }}</label>
         <br>
         <hr>
-        <h3>Выберите жанры:</h3>
+        <h3>Выберите жанры для фильмов:</h3>
         <table>
             <tr>
                 <td width="20%">{% render_field form.action class="genres" %}<label class="genres">{{ form.action.label }}</label></td>
@@ -89,7 +89,7 @@
 
         <br>
         <hr>
-        <h3>Исключить жанры:</h3>
+        <h3>Исключить жанры для фильмов:</h3>
         <table>
             <tr>
                 <td width="20%">{% render_field form.exclude_action class="genres" %}<label class="genres">{{ form.exclude_action.label }}</label></td>
@@ -176,6 +176,64 @@
         <label class="genres">{{ form.date_to.label }}</label>{% render_field form.date_to class="genres" %}
 
         <p></p>
+        <hr>
+        <h3>Выберите жанры для игр:</h3>
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.games_indie class="genres" %}<label class="genres">{{ form.games_indie.label }}</label></td>
+                <td width="20%">{% render_field form.games_action class="genres" %}<label class="genres">{{ form.games_action.label }}</label></td>
+                <td width="20%">{% render_field form.games_adventure class="genres" %}<label class="genres">{{ form.games_adventure.label }}</label></td>
+                <td width="20%">{% render_field form.games_casual class="genres" %}<label class="genres">{{ form.games_casual.label }}</label></td>
+                <td width="20%">{% render_field form.games_simulation class="genres" %}<label class="genres">{{ form.games_simulation.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.games_rpg class="genres" %}<label class="genres">{{ form.games_rpg.label }}</label></td>
+                <td width="20%">{% render_field form.games_strategy class="genres" %}<label class="genres">{{ form.games_strategy.label }}</label></td>
+                <td width="20%">{% render_field form.games_singleplayer class="genres" %}<label class="genres">{{ form.games_singleplayer.label }}</label></td>
+                <td width="20%">{% render_field form.games_early_access class="genres" %}<label class="genres">{{ form.games_early_access.label }}</label></td>
+                <td width="20%">{% render_field form.games_free_to_play class="genres" %}<label class="genres">{{ form.games_free_to_play.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.games_twod class="genres" %}<label class="genres">{{ form.games_twod.label }}</label></td>
+                <td width="20%">{% render_field form.games_atmospheric class="genres" %}<label class="genres">{{ form.games_atmospheric.label }}</label></td>
+                <td width="20%">{% render_field form.games_threed class="genres" %}<label class="genres">{{ form.games_threed.label }}</label></td>
+                <td width="20%">{% render_field form.games_massively_multiplayer class="genres" %}<label class="genres">{{ form.games_massively_multiplayer.label }}</label></td>
+                <td width="20%">{% render_field form.games_multiplayer class="genres" %}<label class="genres">{{ form.games_multiplayer.label }}</label></td>
+            </tr>
+        </table>
+        <label class="genres">{{ form.games_other.label }}</label>{% render_field form.games_other class="genres" %}
+        <p></p>
+
+
+        <h3>Исключить жанры для игр:</h3>
+        <table>
+            <tr>
+                <td width="20%">{% render_field form.games_indie class="genres" %}<label class="genres">{{ form.games_indie.label }}</label></td>
+                <td width="20%">{% render_field form.games_action class="genres" %}<label class="genres">{{ form.games_action.label }}</label></td>
+                <td width="20%">{% render_field form.games_adventure class="genres" %}<label class="genres">{{ form.games_adventure.label }}</label></td>
+                <td width="20%">{% render_field form.games_casual class="genres" %}<label class="genres">{{ form.games_casual.label }}</label></td>
+                <td width="20%">{% render_field form.games_simulation class="genres" %}<label class="genres">{{ form.games_simulation.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.games_rpg class="genres" %}<label class="genres">{{ form.games_rpg.label }}</label></td>
+                <td width="20%">{% render_field form.games_strategy class="genres" %}<label class="genres">{{ form.games_strategy.label }}</label></td>
+                <td width="20%">{% render_field form.games_singleplayer class="genres" %}<label class="genres">{{ form.games_singleplayer.label }}</label></td>
+                <td width="20%">{% render_field form.games_early_access class="genres" %}<label class="genres">{{ form.games_early_access.label }}</label></td>
+                <td width="20%">{% render_field form.games_free_to_play class="genres" %}<label class="genres">{{ form.games_free_to_play.label }}</label></td>
+            </tr>
+            <tr>
+                <td width="20%">{% render_field form.games_twod class="genres" %}<label class="genres">{{ form.games_twod.label }}</label></td>
+                <td width="20%">{% render_field form.games_atmospheric class="genres" %}<label class="genres">{{ form.games_atmospheric.label }}</label></td>
+                <td width="20%">{% render_field form.games_threed class="genres" %}<label class="genres">{{ form.games_threed.label }}</label></td>
+                <td width="20%">{% render_field form.games_massively_multiplayer class="genres" %}<label class="genres">{{ form.games_massively_multiplayer.label }}</label></td>
+                <td width="20%">{% render_field form.games_multiplayer class="genres" %}<label class="genres">{{ form.games_multiplayer.label }}</label></td>
+            </tr>
+        </table>
+        <label class="genres">{{ form.exclude_games_other.label }}</label>{% render_field form.exclude_games_other class="genres" %}
+        <p></p>
+
+
+
         <input class="btn_login" type="submit" value="искать">
     </form>
 </div>

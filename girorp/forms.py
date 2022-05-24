@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import NonOrdinaryUser
 from django.contrib.auth.models import User
-from .lists import ratings_help_text, actors_list, countries_list, new_book_genres_list
+from .lists import ratings_help_text, actors_list, countries_list, games_tag_list
 # import cchardet
 
 class CustomUserCreationForm(UserCreationForm):
@@ -140,3 +140,40 @@ class MoviesChoiceForm(forms.Form):
     fairytales_book = forms.BooleanField(label='Сказки', required=False)
     student_book = forms.BooleanField(label='Школьные учебники', required=False)
     school_book = forms.BooleanField(label='Учебная и научная литература', required=False)
+
+    # ИГРЫ -----------------------------------------------
+    games_indie = forms.BooleanField(label='Инди', required=False)
+    games_action = forms.BooleanField(label='Экшен', required=False)
+    games_adventure = forms.BooleanField(label='Приключение', required=False)
+    games_casual = forms.BooleanField(label='Казуальная игра', required=False)
+    games_simulation = forms.BooleanField(label='Симулятор', required=False)
+    games_rpg = forms.BooleanField(label='Ролевая игра', required=False)
+    games_strategy = forms.BooleanField(label='Стратегия', required=False)
+    games_singleplayer = forms.BooleanField(label='Для одного игрока', required=False)
+    games_early_access = forms.BooleanField(label='Ранний доступ', required=False)
+    games_free_to_play = forms.BooleanField(label='Бесплатная игра', required=False)
+    games_twod = forms.BooleanField(label='2D', required=False)
+    games_atmospheric = forms.BooleanField(label='Атмосферная', required=False)
+    games_threed = forms.BooleanField(label='3D', required=False)
+    games_massively_multiplayer = forms.BooleanField(label='ММО', required=False)
+    games_multiplayer = forms.BooleanField(label='Для нескольких игроков', required=False)
+    games_story_rich = forms.BooleanField(label='Глубокий сюжет', required=False)
+    games_other = forms.MultipleChoiceField(choices=games_tag_list, required=False, label='выберите другие жанры:')
+
+    exclude_games_indie = forms.BooleanField(label='Инди', required=False)
+    exclude_games_action = forms.BooleanField(label='Экшен', required=False)
+    exclude_games_adventure = forms.BooleanField(label='Приключение', required=False)
+    exclude_games_casual = forms.BooleanField(label='Казуальная игра', required=False)
+    exclude_games_simulation = forms.BooleanField(label='Симулятор', required=False)
+    exclude_games_rpg = forms.BooleanField(label='Ролевая игра', required=False)
+    exclude_games_strategy = forms.BooleanField(label='Стратегия', required=False)
+    exclude_games_singleplayer = forms.BooleanField(label='Для одного игрока', required=False)
+    exclude_games_early_access = forms.BooleanField(label='Ранний доступ', required=False)
+    exclude_games_free_to_play = forms.BooleanField(label='Бесплатная игра', required=False)
+    exclude_games_twod = forms.BooleanField(label='2D', required=False)
+    exclude_games_atmospheric = forms.BooleanField(label='Атмосферная', required=False)
+    exclude_games_threed = forms.BooleanField(label='3D', required=False)
+    exclude_games_massively_multiplayer = forms.BooleanField(label='ММО', required=False)
+    exclude_games_multiplayer = forms.BooleanField(label='Для нескольких игроков', required=False)
+    exclude_games_story_rich = forms.BooleanField(label='Глубокий сюжет', required=False)
+    exclude_games_other = forms.MultipleChoiceField(choices=games_tag_list, required=False, label='исключить другие жанры:')
