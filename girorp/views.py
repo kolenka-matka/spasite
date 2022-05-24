@@ -171,8 +171,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                 selection.append('вы выбрали следующую категорию: ' + ', '.join(selected_category))
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
 
-            # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
-            # '''
+
             fantasy_book = ('/knigi-fentezi/', form.cleaned_data.get('fantasy_book'))
             detective_book = ('/knigi-detektivy/', form.cleaned_data.get('detective_book'))
             science_fiction_book = ('/knigi-fantastika/', form.cleaned_data.get('science_fiction_book'))
@@ -232,9 +231,10 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             games_massively_multiplayer = ('128', form.cleaned_data.get('games_massively_multiplayer'))
             games_multiplayer = ('3859', form.cleaned_data.get('games_multiplayer'))
             games_genres = [games_indie, games_action, games_adventure, games_casual, games_simulation, games_rpg, games_strategy, games_singleplayer, games_early_access, games_free_to_play, games_twod, games_atmospheric, games_threed, games_massively_multiplayer, games_multiplayer]
-            games_selected_genres = [item[0].replace('_', '-') for item in games_genres if item[1] == True]
+            games_other = form.cleaned_data.get('games_other')
+            games_selected_genres = games_other + [item[0].replace('_', '-') for item in games_genres if item[1] == True]
             if games_selected_genres:
-                selection.append('вы выбрали следующие жанры для игры: ' + ', '.join(games_selected_genres))
+                selection.append('вы выбрали следующие жанры для игр: ' + ', '.join(games_selected_genres))
 
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ИСКЛЮЧИТЬ ЖАНРЫ !!!!!!!!!!!!!
             exclude_games_indie = ('492', form.cleaned_data.get('exclude_games_indie'))
@@ -252,10 +252,12 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             exclude_games_threed = ('4191', form.cleaned_data.get('exclude_games_threed'))
             exclude_games_massively_multiplayer = ('128', form.cleaned_data.get('exclude_games_massively_multiplayer'))
             exclude_games_multiplayer = ('3859', form.cleaned_data.get('exclude_games_multiplayer'))
+            exclude_games_other = form.cleaned_data.get('exclude_games_other')
             exclude_games_genres = [exclude_games_indie, exclude_games_action, exclude_games_adventure, exclude_games_casual, exclude_games_simulation, exclude_games_rpg, exclude_games_strategy, exclude_games_singleplayer, exclude_games_early_access, exclude_games_free_to_play, exclude_games_twod, exclude_games_atmospheric, exclude_games_threed, exclude_games_massively_multiplayer, exclude_games_multiplayer]
             exclude_games_genres = [item[0] for item in exclude_games_genres if item[1] == True]
+            exclude_games_genres = exclude_games_other + exclude_games_genres
             if exclude_games_genres:
-                selection.append('вы выбрали следующие жанры для игры: ' + ', '.join(exclude_games_genres))
+                selection.append('вы исключили следующие жанры для игр: ' + ', '.join(exclude_games_genres))
 
 
             return render(request, 'search/movies_results.html',
