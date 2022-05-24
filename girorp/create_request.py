@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
-# from .lists import new_book_genres_list
+from .lists import new_book_genres_list
 import re
 
 
@@ -13,7 +13,17 @@ def from_hren_to_genre(name):
 def create_request(selected_category=None, selected_genres=None, countries=None,
                    exclude_genres=set(), plot=None, ratings=None, actors=None):
 
-    url = "https://www.imdb.com/search/title/?title_type=feature,tv_movie,short,documentary"
+    url = "https://www.imdb.com/search/title/?title_type="
+
+    cat = list()
+    if 'movies' in selected_category:
+        cat.append('feature,tv_movie,short,documentary')
+    if 'tv_series' in selected_category:
+        cat.append('tv_series')
+    if 'podcasts' in selected_category:
+        cat.append('podcast_series')
+    url += ','.join(cat)
+
     if selected_genres:
         if exclude_genres:
             selected_genres = [item for item in selected_genres if item not in exclude_genres]
@@ -65,7 +75,7 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
         '''link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
         pic = re.search(r'class="ipc-image" loading="eager" src=".*?"', requests.get(link).text).group(0)
         pic = pic[pic.find('src') + 5:-1:]'''
-        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': 'pic', 'link': link}
+        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': 'pic', 'link': link, 'type': 'movie'}
         output.append(dic)
     return output
 
@@ -98,7 +108,7 @@ def books_help(selected_books=None):
         result = []
         genre = [i[1] for i in new_book_genres_list if i[0] == selected_books[0]][0]
         for i in range(len(names)):
-            dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre, 'image': imgs[i]}
+            dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre, 'image': imgs[i], 'type': 'book'}
             # dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre}
             # print(dic)
             result.append(dic)
@@ -136,7 +146,24 @@ def choose_games(selected_genres=None, exclude_genres=None, players=None):
             reviews = re.search(r'\d{1,2}%', reviews).group(0)
             dic['reviews'] = reviews  # процент положительных отзывов
             dic['pic'] = item.find('div', class_="col search_capsule").find('img').get('src')
+            dic['type'] = 'game'
             output.append(dic)
     return output
 
-print(choose_games(['1742']), sep='\n')
+
+def join_results(a: list, b=None, c=None) -> list:
+    if b is None:
+        b = list()
+    if c is None:
+        c = list()
+    length = max(len(a), len(b), len(c))
+    result = list()
+    for i in range(length):
+        if i < len(a):
+            result.append(a[i])
+        if i < len(b):
+            result.append(b[i])
+        if i < len(c):
+            result.append(c[i])
+    return result
+

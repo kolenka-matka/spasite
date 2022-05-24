@@ -42,15 +42,8 @@
     {% endfor %}
 </div>
 
-
+<!--
 <div id="wrapper" style="margin: 10px;">
-<!--     <tr>
-    {% for item in selection %}
-        <p>
-            {{ item }}
-        </p>
-    {% endfor %}
-    </tr> -->
 <div id="wrapper" style="margin: 10px;">
     {% for i in games %}
     <tr>
@@ -71,24 +64,42 @@
             <p><b>Название книги: <td class="film-name">{{ i.name }}</td></b></p>
             <p> Автор: <td>{{ i.author }}</td> </p>
             <p> Жанры: <td>{{ i.genre }}</td> </p>
-    <!--        <img src={{ i.image }} alt="">-->
+            <img src={{ i.image }} alt="">
         </td>
         <br>
     </tr>
     {% endfor %}
 
 </div>
+--!>
     {% for i in temp %}
         <div class="result_box">
-            <img align="middle" height="300" src={{ i.pic }} width="200">
+            {% if i.type != "game" %}
+                <img align="middle" height="300" src={{ i.pic }} width="200">
 
             <div class="result_info">
-                <p style="font-weight:bold">название фильма: {{ i.name }}</p>
-                <p> год: {{ i.year }}</p>
-                <p> жанры: {{ i.genre }}</p>
-                <!-- <p> описание: {{ i.summary }}</p> -->
-                <!-- <p> картинка: <td>{{ i.pic }}</td> </p> -->
-                <br>
+                {% if i.type == "movie" %}
+                    <p style="font-weight:bold">название фильма: {{ i.name }}</p>
+                    <p> год: {{ i.year }}</p>
+                    <p> жанры: {{ i.genre }}</p>
+                    <p> описание: {{ i.summary }}</p>
+                    <!-- <p> картинка: <td>{{ i.pic }}</td> </p> -->
+                    <br>
+                {% elif i.type == "game" %}
+                    <p style="font-weight:bold">название игры: {{ i.title }}</p>
+                    <p> ссылка: {{ i.link }}</p>
+                    <p> положительных отзывов: {{ i.reviews }}</p>
+                    <p> описание: {{ i.summary }}</p>
+                    <img src={{ i.pic }} alt={{i.title}}>
+                    <br>
+                {% else %}                           <!-- книга -->
+                    <p style="font-weight:bold">название книги: {{ i.name }}</p>
+                    <p> автор: {{ i.author }}</p>
+                    <p> жанры: {{ i.genre }}</p>
+                    <img src={{ i.image }} alt="">
+                    <br>
+                {% endif %}
+
                 <input class="btn_more_info" type="submit" value="узнать подробнее">
             </div>
             <div class="favourites">

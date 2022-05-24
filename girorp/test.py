@@ -441,8 +441,8 @@ soup_ = BeautifulSoup(text_, 'lxml')
 tags_ = soup_.find('div', class_='tag_browse_tags peeking_carousel')
 tags_ = tags_.find_all('div')
 tags_ = ['games_' + item.text.lower().replace(' ', '_').replace('-', '_').replace('2', 'two').replace('3', 'three') for item in tags_]
-# print(tags)
-# print(tags_)
+print(tags)
+print(tags_)
 
 # games_tag_list = [(tags_[i], tags[i][0]) for i in range(15, 426)]
 # print(games_tag_list)
@@ -464,6 +464,9 @@ players = [item.strip() for item in ''' Для одного игрока
  Кооператив (общий экран)
  Общий экран
  Кроссплатформенная игра'''.split('\n')]
-a = '2%2C1%2C49%2C36%2C47%2C37%2C9%2C38%2C48%2C39%2C24%2C27'.split('%2C')
-players = [(a[i], players[i]) for i in range(len(a))]
-print(players)
+# a = '2%2C1%2C49%2C36%2C47%2C37%2C9%2C38%2C48%2C39%2C24%2C27'.split('%2C')
+# players = [(a[i], players[i]) for i in range(len(a))]
+# print(players)
+
+dic = {tags[i][1]: tags[i][0] for i in range(426)}
+print(dic)
