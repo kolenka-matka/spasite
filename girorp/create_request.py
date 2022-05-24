@@ -92,32 +92,40 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
 
 
 def books_help(selected_books=None):
-    url = "https://www.litres.ru"
-    text_ = requests.get(url).text
-    url = url + selected_books[0] + "elektronnie-knigi/"
-    page = requests.get(url)
-    soup = BeautifulSoup(page.text, "html.parser")
-    names = []
-    authors = []
-    hrefs = []
+    if selected_books:
+        url = "https://www.litres.ru"
+        text_ = requests.get(url).text
+        url = url + selected_books[0] + "elektronnie-knigi/"
+        page = requests.get(url)
+        soup = BeautifulSoup(page.text, "html.parser")
+        names = []
+        authors = []
+        hrefs = []
+        imgs = []
 
-    for link in soup.findAll(class_='art-item__name__href'):
-        href = link.get('href')
-        name = link.get('title')
-        names.append(name)
-        hrefs.append(href)
+        for link in soup.findAll(class_="cover_img"):
+            href = link.get('src')
+            imgs.append(href)
 
-    for link in soup.findAll(class_='art-item__author'):
-        auth = link.text
-        authors.append(auth)
+        for link in soup.findAll(class_='art-item__name__href'):
+            href = link.get('href')
+            name = link.get('title')
+            names.append(name)
+            hrefs.append(href)
 
-    result = []
-    genre = [i[1] for i in new_book_genres_list if i[0] == selected_books[0]][0]
-    for i in range(len(names)):
-        dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre}
-        # print(dic)
-        result.append(dic)
+        for link in soup.findAll(class_='art-item__author'):
+            auth = link.text
+            authors.append(auth)
 
-    return result
+        result = []
+        genre = [i[1] for i in new_book_genres_list if i[0] == selected_books[0]][0]
+        for i in range(len(names)):
+            dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre, 'image': imgs[i]}
+            # dic = {'name': names[i], 'author': authors[i], 'href': hrefs[i], 'genre': genre}
+            # print(dic)
+            result.append(dic)
+
+        return result
+    return []
 
 

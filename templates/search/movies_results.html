@@ -34,26 +34,47 @@
     </div>
 </header>
 
+<div class="selected_box">
+    {% for item in selection %}
+        <p class="selected">
+            {{ item }}
+        </p>
+    {% endfor %}
+</div>
+
+
 <div id="wrapper" style="margin: 10px;">
-    <tr>
+<!--     <tr>
     {% for item in selection %}
         <p>
             {{ item }}
         </p>
     {% endfor %}
-    </tr>
+    </tr> -->
 
     {% for i in temp %}
-    <tr>
-        <p><b>название фильма: <td class="film-name">{{ i.name }}</td></b></p>
-        <p> год: <td>{{ i.year }}</td> </p>
-        <p> жанры: <td>{{ i.genre }}</td> </p>
-        <p> описание: <td>{{ i.summary }}</td> </p>
-        <p> картинка: <td>{{ i.pic }}</td> </p>
-        <img height="98" src={{ i.pic }} width="67">
-        <p> ссылка: <td> <a href= {{ i.link }}></a></td> </p>
+        <div class="result_box">
+            <img align="middle" height="300" src={{ i.pic }} width="200">
+
+            <div class="result_info">
+                <p style="font-weight:bold">название фильма: {{ i.name }}</p>
+                <p> год: {{ i.year }}</p>
+                <p> жанры: {{ i.genre }}</p>
+                <!-- <p> описание: {{ i.summary }}</p> -->
+                <!-- <p> картинка: <td>{{ i.pic }}</td> </p> -->
+                <br>
+                <input class="btn_more_info" type="submit" value="узнать подробнее">
+            </div>
+            <div class="favourites">
+                    <input class="btn_add_to_fav" type="submit" value="Добавить в избранное">
+                    <br>
+                    <br>
+                    <input class="btn_add_to_fav" type="submit" value="Убрать из избранного">
+            </div>
+
+            <!-- <p> ссылка: <a href= {{ i.link }}></a></p> -->
+        </div>
         <br>
-    </tr>
     {% endfor %}
 </div>
 

@@ -172,7 +172,7 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
             # ---------------------------------- КАТЕГОРИЯ ПОИСКА ----------------------------------
 
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
-            '''
+            # '''
             fantasy_book = ('/knigi-fentezi/', form.cleaned_data.get('fantasy_book'))
             detective_book = ('/knigi-detektivy/', form.cleaned_data.get('detective_book'))
             science_fiction_book = ('/knigi-fantastika/', form.cleaned_data.get('science_fiction_book'))
@@ -219,10 +219,10 @@ def choose_movies(request):  # !!!!!!!!!!!!!!!!!!!!!!! ФИЛЬМЫ
                 selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
 
             # !!!!!!!!!!!!!!!! -- вот отсюда начинается код из-за которого ничего не работает -- !!!!!!!!!!!!!!!!!!!
-            '''
+            # '''
             return render(request, 'search/movies_results.html',
                           {'temp': create_request(selected_category, selected_genres, countries,
-                                                  exclude_genres, plot, ratings, actors), 'selection': selection})
+                                                  exclude_genres, plot, ratings, actors), 'selection': selection, 'books': books_help(selected_books)})
     else:
         form = MoviesChoiceForm()
     return render(request, 'search/movies_choice.html', {'form': form})
