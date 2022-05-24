@@ -6,7 +6,7 @@ from django.shortcuts import HttpResponseRedirect
 from .create_request import create_request, books_help, choose_games, join_results
 from .forms import LoginForm, UserRegistrationForm, MoviesChoiceForm
 from dal import autocomplete
-from .lists import hren_to_tag
+from .lists import hren_to_tag, help
 
 
 
@@ -213,9 +213,9 @@ def choose_movies(request):
                          sport_book,
                          cooking_book, kids_book, fairytales_book, student_book, school_book]
 
-                selected_books = [item[0].replace('_', '-') for item in books if item[1] == True]
+                selected_books = [item[0] for item in books if item[1] == True]
                 if selected_books:
-                    selection.append('вы выбрали следующие жанры для книг: ' + ', '.join(selected_books))
+                    selection.append('вы выбрали следующие жанры для книг: ' + ', '.join([help[book_] for book_ in selected_books]))
                     result.append(books_help(selected_books))
 
 

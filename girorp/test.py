@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from .lists import new_book_genres_list
 
 # о том как я пыталась достать список меток по играм:
 url = 'https://store.steampowered.com/tag/browse/'
@@ -470,3 +471,6 @@ players = [item.strip() for item in ''' Для одного игрока
 
 dic = {tags[i][1]: tags[i][0] for i in range(426)}
 print(dic)
+
+help = {item[0]: item[1] for item in new_book_genres_list}
+print(help)

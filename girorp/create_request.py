@@ -72,10 +72,10 @@ def create_request(selected_category=None, selected_genres=None, countries=None,
         summary = item.find_all("p", class_="text-muted")[-1].text[1:]
         people = item.find("p", class_='').text
 
-        '''link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
+        link = 'https://www.imdb.com' + item.find('h3', class_="lister-item-header").find('a').get('href')
         pic = re.search(r'class="ipc-image" loading="eager" src=".*?"', requests.get(link).text).group(0)
-        pic = pic[pic.find('src') + 5:-1:]'''
-        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': 'pic', 'link': link, 'type': 'movie'}
+        pic = pic[pic.find('src') + 5:-1:]
+        dic = {'name': name, 'year': year, 'genre': genre, "summary": summary, 'pic': pic, 'link': link, 'type': 'movie'}
         output.append(dic)
     return output
 
