@@ -81,7 +81,7 @@
             {% elif i.type == "book" %}
                 <img align="middle" src={{ i.image }} width="200">
             {% else %}
-                <img align="middle" src={{ i.pic }} width="200">
+                <img align="middle" height="75" src={{ i.pic }} width="200">
             {% endif %}
 
 
@@ -104,8 +104,6 @@
                     <p style="font-weight:bold">название игры: {{ i.title }}</p>
                     <p> ссылка: {{ i.link }}</p>
                     <p> положительных отзывов: {{ i.reviews }}</p>
-                    <p> описание: {{ i.summary }}</p>
-                    <img src={{ i.pic }} alt={{i.title}}>
                     <br>
                 {% else %}                           <!-- книга -->
                     <p style="font-weight:bold">название книги: {{ i.name }}</p>
